@@ -188,4 +188,19 @@ class Places extends Model
 
         return $query->get();
     }
+
+    // Get top N places by country and region substring (with photos)
+    public static function getTopByCountryRegion(string $country, string $region, int $limit = 3): Collection
+    {
+        return self::with('photos')
+            ->where('country', $country)
+            ->where(function($q) use ($region) {
+                $q->where('location', 'LIKE', '%' . $region . '%')
+                  ->orWhere('name', 'LIKE', '%' . $region . '%')
+                  ->orWhere('caption', 'LIKE', '%' . $region . '%');
+            })
+            ->orderBy('name')
+            ->limit($limit)
+            ->get();
+    }
 }

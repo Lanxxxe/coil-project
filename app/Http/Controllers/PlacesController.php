@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 use App\Models\Places;
 use Illuminate\Validation\ValidationException;
+use App\Services\GeoRegionService;
 
 class PlacesController extends Controller
 {
@@ -523,6 +524,82 @@ class PlacesController extends Controller
                 'status' => 'error',
                 'message' => 'Failed to retrieve place',
                 'error' => $e->getMessage()
+            ], 500);
+        }
+    }
+
+    /**
+     * Get top places by country and region (substring match) with photos
+     */
+    public function getByCountryRegion(Request $request): JsonResponse
+    {
+        try {
+            $request->validate([
+                'country' => 'required|string|max:100',
+                'region'  => 'required|string|max:100',
+                'limit'   => 'nullable|integer|min:1|max:10',
+                'precise' => 'nullable|boolean',
+            ]);
+
+            $country = $request->get('country');
+            $region  = $request->get('region');
+            $limit   = (int)($request->get('limit', 3));
+            $precise = filter_var($request->get('precise', false), FILTER_VALIDATE_BOOL);
+
+            // Try precise PIP filter when requested
+            $places = null;
+            if ($precise) {
+                $code = strtolower(str_starts_with(strtolower($country), 'phil') ? 'ph' : (str_starts_with(strtolower($country), 'indo') ? 'id' : ''));
+                if ($code) {
+                    $feature = GeoRegionService::findRegionFeature($code, $region);
+                    $geom = $feature['geometry'] ?? null;
+                    if ($geom) {
+                        // quick bbox prefilter
+                        $bbox = GeoRegionService::bbox($geom);
+                        if ($bbox) {
+                            [$minLng,$minLat,$maxLng,$maxLat] = $bbox;
+                            $candidates = Places::with('photos')
+                                ->where('country', $country)
+                                ->whereBetween('latitude', [$minLat, $maxLat])
+                                ->whereBetween('longitude', [$minLng, $maxLng])
+                                ->get();
+                        } else {
+                            $candidates = Places::with('photos')->where('country', $country)->get();
+                        }
+                        // PIP test
+                        $filtered = $candidates->filter(function($p) use ($geom) {
+                            $lng = (float)$p->longitude; $lat = (float)$p->latitude;
+                            return GeoRegionService::pointInGeometry($lng, $lat, $geom);
+                        })->values();
+                        $places = $filtered->sortBy('name')->take($limit)->values();
+                    }
+                }
+            }
+            // Fallback to LIKE if precise not available
+            if ($places === null) {
+                $places = Places::getTopByCountryRegion($country, $region, $limit);
+            }
+
+            return response()->json([
+                'status' => 'success',
+                'message' => "Top {$limit} places in '{$country}' for region '{$region}'",
+                'data' => $places,
+                'count' => $places->count(),
+                'country' => $country,
+                'region' => $region,
+                'precise' => (bool)$precise,
+            ], 200);
+        } catch (\Illuminate\Validation\ValidationException $e) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Validation failed',
+                'errors' => $e->errors(),
+            ], 422);
+        } catch (\Exception $e) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Failed to retrieve places by country and region',
+                'error' => $e->getMessage(),
             ], 500);
         }
     }
