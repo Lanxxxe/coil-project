@@ -63,6 +63,12 @@
 
 /* Custom styles for the home page */
 @layer components {
+    /* Hero overlay based on theme */
+    [data-hero-overlay] { background: var(--hero-overlay); }
+
+    /* Ken Burns slow zoom for hero images */
+    .kenburns img { transform-origin: center center; animation: kenburns 18s ease-in-out infinite alternate; }
+
     .hero-slide-transition {
         transition: opacity 1000ms ease-in-out;
     }
@@ -125,6 +131,14 @@
         background-clip: text;
         -webkit-text-fill-color: transparent;
     }
+
+    /* Scroll reveal utility: elements start slightly translated and transparent */
+    .reveal-on-scroll { opacity: 0; transform: translateY(16px); transition: opacity 600ms ease, transform 600ms ease; }
+    .reveal-on-scroll.is-visible { opacity: 1; transform: translateY(0); }
+
+    /* Pressable microinteraction */
+    .pressable { transition: transform 120ms ease, filter 120ms ease; will-change: transform; }
+    .pressable.is-pressed { transform: translateY(1px) scale(0.99); filter: brightness(0.98); }
     /* Badges */
     .badge { display: inline-flex; align-items: center; gap: 0.375rem; border-radius: 9999px; font-weight: 600; color: var(--badge-text); }
     .badge--sm { font-size: 0.75rem; padding: 0.25rem 0.5rem; }
@@ -178,6 +192,12 @@ img {
 
 img[data-loading] {
     opacity: 0;
+}
+
+/* Ken Burns keyframes for hero */
+@keyframes kenburns {
+    0%   { transform: scale(1) translate3d(0,0,0); }
+    100% { transform: scale(1.08) translate3d(0,0,0); }
 }
 
 /* Dark-friendly Leaflet controls */

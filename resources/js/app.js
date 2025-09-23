@@ -5,3 +5,5 @@ import './hero';
 import './theme';
 // Leaflet-based country/region map
 import './maplibre-map';
+// UX microinteractions and scroll animations
+import './ux';

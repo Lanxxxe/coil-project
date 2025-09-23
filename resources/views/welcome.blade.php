@@ -94,7 +94,7 @@
         <!-- Hero slideshow -->
     <section class="relative h-screen w-full overflow-hidden" id="hero-carousel" style="color: var(--text-primary)">
             <!-- Slides -->
-            <div class="absolute inset-0">
+            <div class="absolute inset-0 kenburns">
                 @forelse ($slideFiles as $idx => $file)
                     <div 
                         class="absolute inset-0 h-full w-full transition-opacity duration-1000 ease-in-out {{ $idx === 0 ? 'opacity-100' : 'opacity-0' }}"
@@ -132,7 +132,7 @@
                     </p>
 
                     <div class="mt-12 flex flex-wrap items-center justify-center gap-6">
-                        <a href="{{ url('/places?country=Philippines') }}" class="group inline-flex items-center gap-3 rounded-full font-semibold px-8 py-4 shadow-xl transition-all hover:scale-105" style="background: var(--palm); color: #111">
+                        <a href="{{ url('/places?country=Philippines') }}" class="pressable group inline-flex items-center gap-3 rounded-full font-semibold px-8 py-4 shadow-xl transition-all hover:scale-105" style="background: var(--palm); color: #111">
                             <!-- PH flag -->
                             <svg viewBox="0 0 24 16" class="h-5 w-7 rounded-sm overflow-hidden" aria-hidden="true">
                                 <rect width="24" height="16" fill="#0038A8"/>
@@ -141,7 +141,7 @@
                             </svg>
                             <span>Explore Philippines</span>
                         </a>
-                        <a href="{{ url('/places?country=Indonesia') }}" class="group inline-flex items-center gap-3 rounded-full font-semibold px-8 py-4 shadow-xl transition-all hover:scale-105" style="background: var(--sunset); color: #111">
+                        <a href="{{ url('/places?country=Indonesia') }}" class="pressable group inline-flex items-center gap-3 rounded-full font-semibold px-8 py-4 shadow-xl transition-all hover:scale-105" style="background: var(--sunset); color: #111">
                             <!-- ID flag -->
                             <svg viewBox="0 0 24 16" class="h-5 w-7 rounded-sm overflow-hidden" aria-hidden="true">
                                 <rect width="24" height="8" fill="#CE1126"/>
@@ -174,7 +174,7 @@
         </section>
 
         <!-- Food Gallery Section -->
-    <section id="culinary" class="py-20">
+    <section id="culinary" class="py-20 reveal-on-scroll">
             <div class="mx-auto max-w-7xl px-6">
                 <!-- Section Header -->
                 <div class="text-center mb-16">
@@ -195,7 +195,7 @@
                             $imagePath = public_path($base . '/' . $food['filename']);
                         @endphp
                         
-                        <div class="group relative overflow-hidden rounded-2xl aspect-square hover:scale-105 transition-all duration-500 cursor-pointer" style="background: var(--accent-bg)">
+                        <div class="group relative overflow-hidden rounded-2xl aspect-square hover:scale-105 transition-all duration-500 cursor-pointer reveal-on-scroll" style="background: var(--accent-bg)">
                             @if (file_exists($imagePath))
                                 <img 
                                     src="{{ asset($base . '/' . $food['filename']) }}" 
@@ -238,7 +238,7 @@
 
                 <!-- View More Button -->
                 <div class="text-center mb-10">
-                    <a href="{{ url('/food') }}" class="inline-flex items-center gap-2 rounded-full font-semibold px-8 py-4 transition-all hover:scale-105 shadow-lg" style="background: var(--turquoise); color: #111">
+                    <a href="{{ url('/food') }}" class="pressable inline-flex items-center gap-2 rounded-full font-semibold px-8 py-4 transition-all hover:scale-105 shadow-lg" style="background: var(--turquoise); color: #111">
                         <span>Explore All Cuisines</span>
                         <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
@@ -249,7 +249,7 @@
         </section>
 
         <!-- Cultural Moments Section -->
-    <section id="cultural" class="py-20">
+    <section id="cultural" class="py-20 reveal-on-scroll">
             <div class="mx-auto max-w-7xl px-6">
                 <!-- Section Header -->
                 <div class="text-center mb-16">
@@ -270,7 +270,7 @@
                             $imagePath = public_path($base . '/' . $place['filename']);
                         @endphp
                         
-                        <div class="group relative overflow-hidden rounded-3xl aspect-[4/3] hover:scale-105 transition-all duration-500" style="background: var(--accent-bg)">
+                        <div class="group relative overflow-hidden rounded-3xl aspect-[4/3] hover:scale-105 transition-all duration-500 reveal-on-scroll" style="background: var(--accent-bg)">
                             @if (file_exists($imagePath))
                                 <img 
                                     src="{{ asset($base . '/' . $place['filename']) }}" 
@@ -323,7 +323,7 @@
                                 </div>
                                 
                                 <!-- CTA Button -->
-                                <button class="inline-flex items-center gap-2 rounded-full font-semibold px-6 py-3 transition-all" style="background: var(--sunset); color: #111">
+                                <button class="pressable inline-flex items-center gap-2 rounded-full font-semibold px-6 py-3 transition-all" style="background: var(--sunset); color: #111">
                                     <span>Experience This</span>
                                     <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
@@ -336,7 +336,7 @@
 
                 <!-- View More Button -->
                 <div class="text-center mt-12">
-                    <a href="{{ url('/places') }}" class="inline-flex items-center gap-2 rounded-full font-semibold px-8 py-4 transition-all hover:scale-105 shadow-lg" style="background: var(--turquoise); color: #111">
+                    <a href="{{ url('/places') }}" class="pressable inline-flex items-center gap-2 rounded-full font-semibold px-8 py-4 transition-all hover:scale-105 shadow-lg" style="background: var(--turquoise); color: #111">
                         <span>Discover All Destinations</span>
                         <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
