@@ -82,7 +82,7 @@
                 <div class="flex items-center gap-3">
                     <button id="theme-toggle" class="inline-flex items-center gap-2 rounded-full font-medium px-4 py-2 transition-colors shadow-md" style="background: var(--card-bg); color: var(--text-primary)" aria-label="Toggle theme">
                         <span class="theme-icon" aria-hidden="true">🌙</span>
-                        <span class="theme-label text-sm">Dark</span>
+                        <span class="theme-label text-sm hero-cta-text">Dark</span>
                     </button>
                     <a href="{{ url('/places') }}" class="hidden sm:inline-flex items-center rounded-full font-medium px-6 py-3 transition-colors shadow-lg" style="background: var(--turquoise); color: #111">
                         Explore Map
@@ -139,7 +139,7 @@
                                 <rect width="24" height="8" y="8" fill="#CE1126"/>
                                 <polygon points="0,0 10,8 0,16" fill="#fff"/>
                             </svg>
-                            <span>Explore Philippines</span>
+                            <span class="hero-cta-text hero-cta-label">Explore Philippines</span>
                         </a>
                         <a href="{{ url('/places?country=Indonesia') }}" class="pressable group inline-flex items-center gap-3 rounded-full font-semibold px-8 py-4 shadow-xl transition-all hover:scale-105" style="background: var(--sunset); color: #111">
                             <!-- ID flag -->
@@ -147,7 +147,7 @@
                                 <rect width="24" height="8" fill="#CE1126"/>
                                 <rect width="24" y="8" height="8" fill="#fff"/>
                             </svg>
-                            <span>Discover Indonesia</span>
+                            <span class="hero-cta-text hero-cta-label">Discover Indonesia</span>
                         </a>
                     </div>
                 </div>

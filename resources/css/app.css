@@ -132,6 +132,21 @@
         -webkit-text-fill-color: transparent;
     }
 
+    /* In light mode, make hero CTA text and theme label match the 'Two Islands' gradient */
+    html[data-theme="light"] .hero-cta-text {
+        background: linear-gradient(90deg, var(--grad-section-from), var(--grad-section-to));
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    /* For the two hero CTA button labels, use solid white in light mode for better contrast */
+    html[data-theme="light"] .hero-cta-label {
+        background: none !important;
+        -webkit-text-fill-color: initial !important;
+        color: #ffffff !important;
+    }
+
     /* Scroll reveal utility: elements start slightly translated and transparent */
     .reveal-on-scroll { opacity: 0; transform: translateY(16px); transition: opacity 600ms ease, transform 600ms ease; }
     .reveal-on-scroll.is-visible { opacity: 1; transform: translateY(0); }
