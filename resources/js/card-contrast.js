@@ -10,8 +10,7 @@
   const cards = document.querySelectorAll('.experience-card');
   if(!cards.length) return;
 
-  // We only flip to dark text when the bottom area is very bright.
-  const THRESHOLD = 0.75; // 0..1
+  const THRESHOLD = 0.60; // tweak to taste (0..1)
 
   function analyze(img, card){
     if(!img.complete || !img.naturalWidth){
@@ -19,27 +18,20 @@
       return;
     }
     try {
-  // Sample the bottom 40% of the image where text is rendered
-  const sampleW = 64;
-  const sampleH = 16;
-  const sy = Math.floor(img.naturalHeight * 0.60);
-  const sh = Math.max(1, Math.floor(img.naturalHeight * 0.40));
-  const sx = 0;
-  const sw = img.naturalWidth;
-
-  const canvas = document.createElement('canvas');
-  canvas.width = sampleW; canvas.height = sampleH;
-  const ctx = canvas.getContext('2d', { willReadFrequently: true });
-  // drawImage with source rect -> bottom strip scaled into small canvas
-  ctx.drawImage(img, sx, sy, sw, sh, 0, 0, sampleW, sampleH);
-  const data = ctx.getImageData(0,0,sampleW,sampleH).data;
+      const w = 48;
+      const h = Math.max(8, Math.round((img.naturalHeight / img.naturalWidth) * w));
+      const canvas = document.createElement('canvas');
+      canvas.width = w; canvas.height = h;
+      const ctx = canvas.getContext('2d', { willReadFrequently: true });
+      ctx.drawImage(img, 0, 0, w, h);
+      const data = ctx.getImageData(0,0,w,h).data;
       let sum = 0; const pixels = data.length / 4;
       for(let i=0;i<data.length;i+=4){
         const r = data[i] / 255, g = data[i+1] / 255, b = data[i+2] / 255;
         sum += 0.2126*r + 0.7152*g + 0.0722*b; // luminance
       }
       const avg = sum / pixels;
-  if(avg > THRESHOLD) card.classList.add('on-light-bg'); else card.classList.remove('on-light-bg');
+      if(avg > THRESHOLD) card.classList.add('on-light-bg'); else card.classList.remove('on-light-bg');
     } catch(e){ /* silent */ }
   }
 
