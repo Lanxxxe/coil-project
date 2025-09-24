@@ -66,7 +66,7 @@
         @endphp
 
         <!-- Top navigation over hero -->
-    <header id="site-header" class="absolute inset-x-0 top-0 z-30 header--glass">
+        <header class="absolute inset-x-0 top-0 z-30 header--glass">
             <nav class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-6 flex items-center justify-between" data-theme-nav>
                 <a href="{{ url('/') }}" class="flex items-center gap-3">
                     <span class="h-8 w-8 rounded-full bg-gradient-to-br from-cyan-400 via-blue-500 to-violet-600 flex items-center justify-center">
@@ -121,10 +121,10 @@
             <!-- Centered content -->
             <div class="relative z-10 h-full flex items-center">
                 <div class="mx-auto w-full max-w-6xl px-6 text-center">
-                    <h1 class="fluid-title tracking-tight">
+                    <h1 class="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-extrabold tracking-tight leading-none">
                         <span class="section-title-gradient">Two Islands</span>
                     </h1>
-                    <p class="mt-6 fluid-subtitle u-text-primary">Endless Adventures</p>
+                    <p class="mt-6 text-2xl sm:text-3xl md:text-4xl font-semibold u-text-primary">Endless Adventures</p>
                     <p class="mt-8 max-w-4xl mx-auto text-lg sm:text-xl md:text-2xl leading-relaxed u-text-secondary">
                         Experience the magic of Southeast Asia where Philippine warmth meets Indonesian mystique. Your extraordinary journey through two archipelago nations begins here.
                     </p>

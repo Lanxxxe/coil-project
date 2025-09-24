@@ -124,11 +124,6 @@
 
     /* Glass header */
     .header--glass { background: color-mix(in oklab, var(--bg-body) 65%, transparent); backdrop-filter: blur(8px); border-bottom: 1px solid var(--panel-ring); }
-    .header--solid { background: var(--bg-body) !important; border-bottom-color: var(--panel-ring) !important; }
-
-    /* Fluid type helpers */
-    .fluid-title { font-weight: 800; line-height: 1; font-size: clamp(2.25rem, 4vw + 1rem, 6rem); }
-    .fluid-subtitle { font-weight: 600; line-height: 1.1; font-size: clamp(1.25rem, 2vw + 0.75rem, 2.25rem); }
 
     /* Experience cards (food & cultural) base + dynamic contrast variant */
     .experience-card { color: #ffffff; }
