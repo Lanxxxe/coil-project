@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{{ trim($__env->yieldContent('title')) ? $__env->yieldContent('title') . ' • ' : '' }}{{ config('app.name', 'Coil Project') }}</title>
+    <title>{{ trim($__env->yieldContent('title')) ? $__env->yieldContent('title') . ' • ' : '' }}{{ config('app.name', 'Two Islands') }}</title>
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     @if (class_exists(\Livewire\Livewire::class))
@@ -24,9 +24,9 @@
     </script>
     <header class="border-b" style="border-color: var(--panel-ring)">
         <nav class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
-            <a href="{{ url('/') }}" class="font-semibold">{{ config('app.name', 'Coil Project') }}</a>
+            <a href="{{ url('/') }}" class="font-semibold">{{ config('app.name', 'Two Islands') }}</a>
             <div class="flex items-center gap-4 text-sm">
-                <a href="{{ url('/food') }}" class="underline">Food</a>
+                <a href="{{ route('food.index') }}" class="underline">Food</a>
                 <a href="{{ url('/places') }}" class="underline">Places</a>
             </div>
         </nav>
@@ -39,5 +39,7 @@
     @if (class_exists(\Livewire\Livewire::class))
         @livewireScripts
     @endif
+    <!-- Global cursor element -->
+    <div id="app-cursor" aria-hidden="true" class="pointer-events-none fixed top-0 left-0 z-[200] hidden"></div>
 </body>
 </html>

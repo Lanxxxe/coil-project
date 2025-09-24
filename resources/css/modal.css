@@ -1,0 +1,41 @@
+/* Standalone modal stylesheet to bypass Tailwind layer pruning */
+
+/* Overlay dimming */
+#food-modal .modal-overlay { opacity: 0; background: rgba(0, 0, 0, 0.6); }
+html[data-theme="light"] #food-modal .modal-overlay { background: rgba(0, 0, 0, 0.4); }
+
+/* Solid modal surface (no transparency) */
+#food-modal .modal-surface {
+  background: var(--surface-bg);
+  color: var(--text-primary);
+  border: 0.5px solid var(--surface-border);
+  box-shadow: var(--surface-shadow);
+  opacity: 1;                 /* keep opaque by default */
+  transform: translateY(-16px); /* start slightly above for top-in */
+  will-change: opacity, transform;
+}
+
+/* Hard guarantees for solid backgrounds in each theme */
+html[data-theme="light"] #food-modal .modal-surface { background: #ffffff !important; background-color: #ffffff !important; color: #1A1A1A; }
+html[data-theme="dark"]  #food-modal .modal-surface { background: #000000 !important; background-color: #000000 !important; color: #F5F5F5; }
+
+/* Modal helpers */
+#food-modal .modal-body { overflow: auto; }
+
+/* Gradient heading utility for modal */
+#food-modal .modal-title {
+  background: linear-gradient(135deg, var(--grad-text-from), var(--grad-text-via), var(--grad-text-to));
+  -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+}
+
+/* Open/close animations */
+#food-modal[data-open="true"] .modal-overlay { animation: overlayIn 200ms ease forwards; }
+#food-modal[data-open="true"] .modal-surface { animation: modalIn 220ms ease-out forwards; }
+#food-modal[data-closing="true"] .modal-overlay { animation: overlayOut 180ms ease forwards; }
+#food-modal[data-closing="true"] .modal-surface { animation: modalOut 180ms ease-in forwards; }
+
+/* Keyframes */
+@keyframes overlayIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes overlayOut { from { opacity: 1; } to { opacity: 0; } }
+@keyframes modalIn { from { opacity: 0; transform: translateY(-16px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes modalOut { from { opacity: 1; transform: translateY(0); } to { opacity: 0; transform: translateY(-16px); } }
