@@ -195,7 +195,7 @@
                             $imagePath = public_path($base . '/' . $food['filename']);
                         @endphp
                         
-                        <div class="experience-card group relative overflow-hidden rounded-2xl aspect-square hover:scale-105 transition-all duration-500 cursor-pointer reveal-on-scroll" style="background: var(--accent-bg)">
+                        <div class="group relative overflow-hidden rounded-2xl aspect-square hover:scale-105 transition-all duration-500 cursor-pointer reveal-on-scroll" style="background: var(--accent-bg)">
                             @if (file_exists($imagePath))
                                 <img 
                                     src="{{ asset($base . '/' . $food['filename']) }}" 
@@ -270,7 +270,7 @@
                             $imagePath = public_path($base . '/' . $place['filename']);
                         @endphp
                         
-                        <div class="experience-card group relative overflow-hidden rounded-3xl aspect-[4/3] hover:scale-105 transition-all duration-500 reveal-on-scroll" style="background: var(--accent-bg)">
+                        <div class="group relative overflow-hidden rounded-3xl aspect-[4/3] hover:scale-105 transition-all duration-500 reveal-on-scroll" style="background: var(--accent-bg)">
                             @if (file_exists($imagePath))
                                 <img 
                                     src="{{ asset($base . '/' . $place['filename']) }}" 
