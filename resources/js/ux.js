@@ -42,4 +42,29 @@ document.addEventListener('DOMContentLoaded', () => {
     el.addEventListener('pointerleave', remove);
     el.addEventListener('blur', remove);
   });
+
+  // Food modal
+  const modal = document.getElementById('food-modal');
+  const title = document.getElementById('food-modal-title');
+  const country = document.getElementById('food-modal-country');
+  const desc = document.getElementById('food-modal-description');
+  const img = document.getElementById('food-modal-image');
+  const closeBtn = document.getElementById('food-modal-close');
+  function openModal() { modal.classList.remove('hidden'); document.body.style.overflow = 'hidden'; }
+  function closeModal() { modal.classList.add('hidden'); document.body.style.overflow = ''; }
+  closeBtn?.addEventListener('click', closeModal);
+  modal?.addEventListener('click', (e) => { if (e.target === modal || e.target.closest('.absolute.inset-0.bg-black/60')) closeModal(); });
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && !modal.classList.contains('hidden')) closeModal(); });
+  document.querySelectorAll('#culinary .experience-card').forEach(card => {
+    function show(){
+      title.textContent = card.getAttribute('data-food-title') || '';
+      country.textContent = card.getAttribute('data-food-country') || '';
+      desc.textContent = card.getAttribute('data-food-description') || '';
+      const src = card.getAttribute('data-food-image');
+      if (src) { img.src = src; img.classList.remove('hidden'); } else { img.classList.add('hidden'); }
+      openModal();
+    }
+    card.addEventListener('click', show);
+    card.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); show(); } });
+  });
 });
