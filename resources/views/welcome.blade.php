@@ -200,6 +200,7 @@
                                 <img 
                                     src="{{ asset($base . '/' . $food['filename']) }}" 
                                     alt="{{ $food['name'] }}" 
+                                    data-card-bg
                                     class="absolute inset-0 h-full w-full object-cover group-hover:scale-110 transition-transform duration-700"
                                 />
                             @else
@@ -230,7 +231,7 @@
                             
                             <!-- Food name -->
                             <div class="absolute bottom-4 left-4 right-4 z-10">
-                                <h3 class="font-semibold text-lg md:text-xl" style="color: var(--text-primary)">{{ $food['name'] }}</h3>
+                                <h3 class="font-semibold text-lg md:text-xl">{{ $food['name'] }}</h3>
                             </div>
                         </div>
                     @endforeach
@@ -275,6 +276,7 @@
                                 <img 
                                     src="{{ asset($base . '/' . $place['filename']) }}" 
                                     alt="{{ $place['name'] }}" 
+                                    data-card-bg
                                     class="absolute inset-0 h-full w-full object-cover group-hover:scale-110 transition-transform duration-700"
                                 />
                             @else
@@ -282,7 +284,7 @@
                             @endif
                             
                             <!-- Overlay -->
-                            <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent" data-hero-overlay></div>
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent" data-hero-overlay></div>
                             
                             <!-- Country badge -->
                             <div class="absolute top-6 left-6 z-10">
@@ -305,8 +307,8 @@
                             
                             <!-- Content -->
                             <div class="absolute bottom-6 left-6 right-6 z-10">
-                                <h3 class="font-bold text-2xl md:text-3xl mb-4" style="color: var(--text-primary)">{{ $place['name'] }}</h3>
-                                <p class="text-base md:text-lg leading-relaxed mb-6" style="color: var(--text-secondary)">{{ $place['description'] }}</p>
+                                <h3 class="font-bold text-2xl md:text-3xl mb-4">{{ $place['name'] }}</h3>
+                                <p class="text-base md:text-lg leading-relaxed mb-6">{{ $place['description'] }}</p>
                                 
                                 <!-- Feature tag -->
                                 <div class="flex items-center gap-3 mb-4">
