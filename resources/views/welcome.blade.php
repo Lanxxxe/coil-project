@@ -66,27 +66,25 @@
         @endphp
 
         <!-- Top navigation over hero -->
-        <header class="absolute inset-x-0 top-0 z-30">
-            <nav class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-6 flex items-center justify-between" data-theme-nav style="color: var(--text-primary)">
+        <header class="absolute inset-x-0 top-0 z-30 header--glass">
+            <nav class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-6 flex items-center justify-between" data-theme-nav>
                 <a href="{{ url('/') }}" class="flex items-center gap-3">
                     <span class="h-8 w-8 rounded-full bg-gradient-to-br from-cyan-400 via-blue-500 to-violet-600 flex items-center justify-center">
                         <span class="h-4 w-4 rounded-full bg-white"></span>
                     </span>
                     <span class="font-semibold text-lg tracking-tight">Coil Group 1</span>
                 </a>
-                <ul class="hidden md:flex items-center gap-8 text-sm" style="color: var(--text-primary)">
-                    <li><a href="#culinary" class="transition-colors" style="color: color-mix(in oklab, var(--text-primary) 85%, transparent)">Culinary Guide</a></li>
-                    <li><a href="#cultural" class="transition-colors" style="color: color-mix(in oklab, var(--text-primary) 85%, transparent)">Cultural Moments</a></li>
-                    <li><a href="#plan" class="transition-colors" style="color: color-mix(in oklab, var(--text-primary) 85%, transparent)">Plan Journey</a></li>
+                <ul class="hidden md:flex items-center gap-8 text-sm u-text-primary">
+                    <li><a href="#culinary" class="transition-colors u-muted">Culinary Guide</a></li>
+                    <li><a href="#cultural" class="transition-colors u-muted">Cultural Moments</a></li>
+                    <li><a href="#plan" class="transition-colors u-muted">Plan Journey</a></li>
                 </ul>
                 <div class="flex items-center gap-3">
-                    <button id="theme-toggle" class="inline-flex items-center gap-2 rounded-full font-medium px-4 py-2 transition-colors shadow-md" style="background: var(--card-bg); color: var(--text-primary)" aria-label="Toggle theme">
+                    <button id="theme-toggle" class="inline-flex items-center gap-2 rounded-full font-medium px-4 py-2 transition-colors shadow-md u-text-primary" style="background: var(--card-bg);" aria-label="Toggle theme">
                         <span class="theme-icon" aria-hidden="true">🌙</span>
                         <span class="theme-label text-sm hero-cta-text">Dark</span>
                     </button>
-                    <a href="{{ url('/places') }}" class="hidden sm:inline-flex items-center rounded-full font-medium px-6 py-3 transition-colors shadow-lg" style="background: var(--turquoise); color: #111">
-                        Explore Map
-                    </a>
+                    <a href="{{ url('/places') }}" class="hidden sm:inline-flex btn btn--teal">Explore Map</a>
                 </div>
             </nav>
         </header>
@@ -126,13 +124,13 @@
                     <h1 class="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-extrabold tracking-tight leading-none">
                         <span class="section-title-gradient">Two Islands</span>
                     </h1>
-                    <p class="mt-6 text-2xl sm:text-3xl md:text-4xl font-semibold" style="color: var(--text-primary)">Endless Adventures</p>
-                    <p class="mt-8 max-w-4xl mx-auto text-lg sm:text-xl md:text-2xl leading-relaxed" style="color: var(--text-secondary)">
+                    <p class="mt-6 text-2xl sm:text-3xl md:text-4xl font-semibold u-text-primary">Endless Adventures</p>
+                    <p class="mt-8 max-w-4xl mx-auto text-lg sm:text-xl md:text-2xl leading-relaxed u-text-secondary">
                         Experience the magic of Southeast Asia where Philippine warmth meets Indonesian mystique. Your extraordinary journey through two archipelago nations begins here.
                     </p>
 
                     <div class="mt-12 flex flex-wrap items-center justify-center gap-6">
-                        <a href="{{ url('/places?country=Philippines') }}" class="pressable group inline-flex items-center gap-3 rounded-full font-semibold px-8 py-4 shadow-xl transition-all hover:scale-105" style="background: var(--palm); color: #111">
+                        <a href="{{ url('/places?country=Philippines') }}" class="pressable group btn" style="background: var(--palm); color: #111">
                             <!-- PH flag -->
                             <svg viewBox="0 0 24 16" class="h-5 w-7 rounded-sm overflow-hidden" aria-hidden="true">
                                 <rect width="24" height="16" fill="#0038A8"/>
@@ -141,7 +139,7 @@
                             </svg>
                             <span class="hero-cta-text hero-cta-label">Explore Philippines</span>
                         </a>
-                        <a href="{{ url('/places?country=Indonesia') }}" class="pressable group inline-flex items-center gap-3 rounded-full font-semibold px-8 py-4 shadow-xl transition-all hover:scale-105" style="background: var(--sunset); color: #111">
+                        <a href="{{ url('/places?country=Indonesia') }}" class="pressable group btn btn--sunset">
                             <!-- ID flag -->
                             <svg viewBox="0 0 24 16" class="h-5 w-7 rounded-sm overflow-hidden" aria-hidden="true">
                                 <rect width="24" height="8" fill="#CE1126"/>
@@ -181,7 +179,7 @@
                     <h2 class="text-4xl sm:text-5xl md:text-6xl font-bold mb-6">
                         <span class="section-title-gradient">Taste Both Worlds</span>
                     </h2>
-                    <p class="text-xl max-w-4xl mx-auto leading-relaxed" style="color: var(--text-secondary)">
+                    <p class="text-xl max-w-4xl mx-auto leading-relaxed u-text-secondary">
                         From Filipino comfort food to Indonesian spice symphonies, every dish tells a story of tradition, family, and the love that brings communities together.
                     </p>
                 </div>
@@ -208,7 +206,7 @@
                             @endif
                             
                             <!-- Overlay -->
-                            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-60 group-hover:opacity-40 transition-opacity duration-300" data-hero-overlay></div>
+                                <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/25 to-transparent opacity-60 group-hover:opacity-40 transition-opacity duration-300" data-hero-overlay></div>
                             
                             <!-- Country badge -->
                             <div class="absolute top-4 left-4 z-10">
@@ -231,7 +229,7 @@
                             
                             <!-- Food name -->
                             <div class="absolute bottom-4 left-4 right-4 z-10">
-                                <h3 class="font-semibold text-lg md:text-xl">{{ $food['name'] }}</h3>
+                                <h3 class="font-semibold text-lg md:text-xl u-text-primary">{{ $food['name'] }}</h3>
                             </div>
                         </div>
                     @endforeach
@@ -239,7 +237,7 @@
 
                 <!-- View More Button -->
                 <div class="text-center mb-10">
-                    <a href="{{ url('/food') }}" class="pressable inline-flex items-center gap-2 rounded-full font-semibold px-8 py-4 transition-all hover:scale-105 shadow-lg" style="background: var(--turquoise); color: #111">
+                    <a href="{{ url('/food') }}" class="pressable btn btn--teal">
                         <span>Explore All Cuisines</span>
                         <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
@@ -257,7 +255,7 @@
                     <h2 class="text-4xl sm:text-5xl md:text-6xl font-bold mb-6">
                         <span class="section-title-alt-gradient">Cultural Moments</span>
                     </h2>
-                    <p class="text-xl max-w-4xl mx-auto leading-relaxed" style="color: var(--text-secondary)">
+                    <p class="text-xl max-w-4xl mx-auto leading-relaxed u-text-secondary">
                         Every moment in Southeast Asia tells a story. These are the experiences that transform travelers into storytellers.
                     </p>
                 </div>
@@ -325,7 +323,7 @@
                                 </div>
                                 
                                 <!-- CTA Button -->
-                                <button class="pressable inline-flex items-center gap-2 rounded-full font-semibold px-6 py-3 transition-all" style="background: var(--sunset); color: #111">
+                                <button class="pressable btn btn--sunset">
                                     <span>Experience This</span>
                                     <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
@@ -338,7 +336,7 @@
 
                 <!-- View More Button -->
                 <div class="text-center mt-12">
-                    <a href="{{ url('/places') }}" class="pressable inline-flex items-center gap-2 rounded-full font-semibold px-8 py-4 transition-all hover:scale-105 shadow-lg" style="background: var(--turquoise); color: #111">
+                    <a href="{{ url('/places') }}" class="pressable btn btn--teal">
                         <span>Discover All Destinations</span>
                         <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
