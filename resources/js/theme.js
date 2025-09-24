@@ -8,23 +8,12 @@
     document.body.dataset.theme = theme; // convenience hook
     const btn = document.getElementById('theme-toggle');
     if (btn) {
-      const icon = btn.querySelector('.theme-icon');
-      const label = btn.querySelector('.theme-label');
-      // Show the NEXT theme as the button text/icon (swap behavior)
-      const next = theme === 'dark' ? 'light' : 'dark';
-      if (next === 'light') {
-        if (icon) icon.textContent = '☀️';
-        if (label) label.textContent = 'Light';
-        btn.setAttribute('aria-label', 'Switch to light mode');
-        btn.classList.remove('bg-black','text-white');
-        btn.classList.add('bg-white/80','text-black');
-      } else {
-        if (icon) icon.textContent = '🌙';
-        if (label) label.textContent = 'Dark';
-        btn.setAttribute('aria-label', 'Switch to dark mode');
-        btn.classList.remove('bg-white/80','text-black');
-        btn.classList.add('bg-black','text-white');
-      }
+      // For neumorphic slider, aria-checked=true means dark
+      const isDark = theme === 'dark';
+      btn.setAttribute('aria-checked', String(isDark));
+      const icon = btn.querySelector('.nm-icon');
+      if (icon) icon.textContent = isDark ? '🌙' : '☀️';
+      btn.setAttribute('aria-label', isDark ? 'Switch to light mode' : 'Switch to dark mode');
     }
     // announce to listeners
     const ev = new CustomEvent('themechange', { detail: { theme } });

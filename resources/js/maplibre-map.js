@@ -39,9 +39,10 @@ document.addEventListener('DOMContentLoaded', () => {
     ]
   };
 
-  // Plain white background style with no tiles/labels
+  // Plain background style with no tiles/labels (color will be synced to --bg-body after load)
   const plainStyle = {
     version: 8,
+    glyphs: 'https://demotiles.maplibre.org/font/{fontstack}/{range}.pbf',
     sources: {},
     layers: [
       { id: 'background', type: 'background', paint: { 'background-color': '#ffffff' } }
@@ -96,9 +97,11 @@ document.addEventListener('DOMContentLoaded', () => {
       fillBase: cssVar('--turquoise', '#26C6DA'),
       fillHover: cssVar('--palm', '#4CAF50'),
       fillActive: cssVar('--sunset', '#FF8A65'),
-      // Use text-primary for outline to keep contrast with background in both themes
+      // outlines and labels should be subtle and theme-aware
       lineColor: cssVar('--text-primary', '#ffffff'),
-      lineOpacity: 0.6,
+      lineOpacity: 0.35,
+      labelColor: cssVar('--text-secondary', '#bfbfbf'),
+      labelHalo: cssVar('--bg-body', '#121212'),
     };
   }
 
@@ -108,9 +111,19 @@ document.addEventListener('DOMContentLoaded', () => {
   const descEl = panel?.querySelector('[data-panel="description"]');
   const countryEl = panel?.querySelector('[data-panel="country"]');
   const metaEl = panel?.querySelector('[data-panel="meta"]');
+  const detailsLink = panel?.querySelector('[data-panel="detailsLink"]');
+  // Media (images + captions)
+  const spotImg = panel?.querySelector('[data-panel="spotImage"]');
+  const foodImg = panel?.querySelector('[data-panel="foodImage"]');
+  const spotCap = panel?.querySelector('[data-panel="spotCaption"]');
+  const foodCap = panel?.querySelector('[data-panel="foodCaption"]');
+  // Ensure lazy-loading is enabled as a progressive enhancement
+  try { if (spotImg) spotImg.loading = 'lazy'; } catch {}
+  try { if (foodImg) foodImg.loading = 'lazy'; } catch {}
 
   const storageKey = 'mapSelection_v2';
   let lastSelectedRegion = '';
+  let regionsContent = null;
 
   const setQuery = (country, region) => {
     const params = new URLSearchParams(window.location.search);
@@ -123,11 +136,91 @@ document.addEventListener('DOMContentLoaded', () => {
     try { localStorage.setItem(storageKey, JSON.stringify({ country, region })); } catch {}
   };
 
-  function updatePanel(country, regionName) {
+  function lookupRegionContent(countryCode, regionName) {
+    if (!regionsContent || !regionName) return null;
+    const key = normalize(regionName);
+    if (countryCode === 'ph') {
+      return regionsContent.ph?.[key] || null;
+    }
+    if (countryCode === 'id') {
+      // Try macro group first, otherwise province-level
+      const macro = regionsContent.id?.macro?.[key];
+      if (macro) return macro;
+      return regionsContent.id?.province?.[key] || null;
+    }
+    return null;
+  }
+
+  // Small stable hash for strings
+  function hashCode(str) {
+    let h = 5381; // djb2
+    for (let i = 0; i < str.length; i++) h = ((h << 5) + h) + str.charCodeAt(i);
+    return Math.abs(h);
+  }
+  // Generate a lightweight online image URL for a given query with stable signature
+  function imageFor(query, seedKey = '') {
+    if (!query) return '';
+    const q = String(query).trim();
+    const clean = encodeURIComponent(q);
+    const sig = hashCode(`${q}|${seedKey}`) % 1000; // keep small to encourage variety but stable
+    return `https://source.unsplash.com/featured/400x240/?${clean}&sig=${sig}`;
+  }
+
+  function setPanelImage(imgEl, capEl, label, query, seedKey = '') {
+    if (!imgEl || !capEl) return;
+    if (!query) {
+      imgEl.classList.add('hidden');
+      try { imgEl.removeAttribute('src'); } catch {}
+      capEl.textContent = '';
+      return;
+    }
+  const url = imageFor(query, seedKey);
+    imgEl.alt = `${label}: ${query}`;
+    imgEl.onload = () => { imgEl.classList.remove('hidden'); };
+    imgEl.onerror = () => { imgEl.classList.add('hidden'); };
+    imgEl.src = url;
+    capEl.textContent = `${label}: ${query}`;
+  }
+
+  function updatePanel(country, regionName, countryCode) {
     if (countryEl) countryEl.textContent = country;
     if (titleEl) titleEl.textContent = regionName || 'Pick a region';
-    if (descEl) descEl.textContent = regionName || 'Click a region to populate this panel with its name.';
+    const content = lookupRegionContent(countryCode || '', regionName || '');
+    if (descEl) {
+      if (content) {
+        descEl.textContent = `Top spot: ${content.spot} • Top food: ${content.food}`;
+      } else {
+        descEl.textContent = regionName || 'Click a region to populate this panel with its name.';
+      }
+    }
     if (metaEl) metaEl.textContent = regionName ? `Region: ${regionName}` : '—';
+
+    // Details link visibility + href
+    if (detailsLink) {
+      if (content && regionName && countryCode) {
+        const regionKey = normalize(regionName);
+        const slug = regionKey.replace(/\s+/g, '-');
+        const cc = String(countryCode).toLowerCase();
+        detailsLink.href = `/regions/${cc}/${slug}`;
+        detailsLink.classList.remove('hidden');
+      } else {
+        detailsLink.classList.add('hidden');
+        detailsLink.removeAttribute('href');
+      }
+    }
+
+    // Update media panels
+    if (content && regionName && country) {
+      const countryHint = (country || '').toString();
+      const spotQuery = `${content.spot} ${countryHint}`;
+      const foodQuery = `${content.food} ${countryHint}`;
+      const seedKey = `${regionName}|${countryHint}`;
+      setPanelImage(spotImg, spotCap, 'Top spot', spotQuery, seedKey);
+      setPanelImage(foodImg, foodCap, 'Top food', foodQuery, seedKey);
+    } else {
+      setPanelImage(spotImg, spotCap, 'Top spot', '');
+      setPanelImage(foodImg, foodCap, 'Top food', '');
+    }
   }
 
   // Load a low-res world land layer to render other countries in gray (no labels)
@@ -215,7 +308,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // For Indonesia grouping (macro regions)
-  const normalize = (s='') => s.toString().trim().toLowerCase();
+  const normalize = (s='') => s.toString().toLowerCase().replace(/[-_]+/g, ' ').replace(/\s+/g, ' ').trim();
   const ID_GROUP_MAP = {
     'aceh': 'Sumatra', 'north sumatra': 'Sumatra', 'west sumatra': 'Sumatra', 'riau': 'Sumatra', 'riau islands': 'Sumatra', 'jambi': 'Sumatra', 'bengkulu': 'Sumatra', 'south sumatra': 'Sumatra', 'bangka belitung islands': 'Sumatra', 'lampung': 'Sumatra',
     'banten': 'Java','jakarta': 'Java','west java': 'Java','central java': 'Java','yogyakarta': 'Java','east java': 'Java',
@@ -234,6 +327,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const SRC = { ph: 'ph-src', id: 'id-src' };
   const LYR = { ph: 'ph-fill', id: 'id-fill' };
   const OUT = { ph: 'ph-outline', id: 'id-outline' };
+  const LAB = { ph: 'ph-label', id: 'id-label' };
 
   function addCountryLayers(code, geojson) {
     const cfg = DATASETS[code];
@@ -247,11 +341,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const idProp = ['shapeID','ID_1','ID','gid','code'].find(k => Object.prototype.hasOwnProperty.call(firstProps, k));
 
     map.addSource(srcId, { type: 'geojson', data: geojson, generateId: true, ...(idProp ? { promoteId: idProp } : {}) });
-    // outline under fill for crisp edges
+    // outline under fill for crisp edges (subtle)
     const tc = themeColors();
     map.addLayer({
       id: outId, type: 'line', source: srcId,
-      paint: { 'line-color': tc.lineColor, 'line-opacity': tc.lineOpacity, 'line-width': 1.2 }
+      paint: { 'line-color': tc.lineColor, 'line-opacity': tc.lineOpacity, 'line-width': 0.8 }
     });
     map.addLayer({
       id: fillId, type: 'fill', source: srcId,
@@ -260,6 +354,26 @@ document.addEventListener('DOMContentLoaded', () => {
         'fill-opacity': ['case', ['boolean', ['feature-state','active'], false], 0.85, ['boolean', ['feature-state','hover'], false], 0.65, 0.35]
       }
     });
+
+    // Optional region labels (only when using our plain style to avoid clashing with raster tiles)
+    if (isPlain && !map.getLayer(LAB[code])) {
+      map.addLayer({
+        id: LAB[code], type: 'symbol', source: srcId,
+        layout: {
+          'text-field': ['coalesce', ['get', 'name'], ['get', 'shapeName'], ['get', 'NAME_1'], ['get', 'NAME'], ['get', 'region'], ['get', 'Province'], ['get', 'province']],
+          'text-size': 11,
+          'text-font': ['Noto Sans Regular','Arial Unicode MS Regular'],
+          'text-allow-overlap': false,
+          'text-anchor': 'center'
+        },
+        paint: {
+          'text-color': tc.labelColor,
+          'text-halo-color': tc.labelHalo,
+          'text-halo-width': 1.2,
+          'text-opacity': 0.7
+        }
+      });
+    }
 
     // Hover handling (robust per-source)
     map.on('mousemove', fillId, (e) => {
@@ -371,7 +485,7 @@ document.addEventListener('DOMContentLoaded', () => {
     map.setFeatureState({ source: srcId, id }, { active: true });
 
     lastSelectedRegion = name;
-    updatePanel(DATASETS[code].label, name);
+  updatePanel(DATASETS[code].label, name, code);
     saveSelection(code, name);
     setQuery(code, name);
 
@@ -425,8 +539,10 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   map.on('load', async () => {
+  // Load region content JSON
+  try { regionsContent = await fetchJSON('/data/regions-content.json'); } catch { regionsContent = null; }
     // Sync background with theme
-  try { map.setPaintProperty('background', 'background-color', isPlain ? '#ffffff' : cssVar('--map-bg', '#0f0f0f')); } catch {}
+  try { map.setPaintProperty('background', 'background-color', cssVar('--bg-body', '#121212')); } catch {}
 
     // Parse query/persisted selection
     const params = new URLSearchParams(location.search);
@@ -446,7 +562,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (geoID) addCountryLayers('id', geoID);
 
     // Initial neutral panel
-    updatePanel('—', '');
+  updatePanel('—', '', '');
 
     // Respect deep-link camera only when not fixed
     if (!FIXED_VIEW && ['ph','id'].includes(qCountry)) {
@@ -493,9 +609,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // React to theme changes
     window.addEventListener('themechange', () => {
-      const { lineColor, lineOpacity, fillBase, fillHover, fillActive } = themeColors();
-      // background color
-  try { map.setPaintProperty('background', 'background-color', isPlain ? '#ffffff' : cssVar('--map-bg', '#0f0f0f')); } catch {}
+      const { lineColor, lineOpacity, fillBase, fillHover, fillActive, labelColor, labelHalo } = themeColors();
+  // background color should match page background for seamless look
+  try { map.setPaintProperty('background', 'background-color', cssVar('--bg-body', '#121212')); } catch {}
       for (const code of ['ph','id']) {
         const outId = OUT[code];
         const fillId = LYR[code];
@@ -505,6 +621,11 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         if (map.getLayer(fillId)) {
           map.setPaintProperty(fillId, 'fill-color', ['case', ['boolean', ['feature-state','active'], false], fillActive, ['boolean', ['feature-state','hover'], false], fillHover, fillBase]);
+        }
+        const labId = LAB[code];
+        if (map.getLayer(labId)) {
+          map.setPaintProperty(labId, 'text-color', labelColor);
+          map.setPaintProperty(labId, 'text-halo-color', labelHalo);
         }
       }
     });

@@ -7,6 +7,9 @@
 
 :root {
     --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+    /* Map/UI harmony */
+    --map-label: color-mix(in oklab, var(--text-secondary) 92%, transparent);
+    --map-outline: color-mix(in oklab, var(--text-primary) 65%, transparent);
     /* Default to dark to reduce flash before JS sets theme */
     --bg-body: #121212; /* dark base */
     --text-primary: #F5F5F5;
@@ -61,6 +64,52 @@
     --footer-border: rgba(255,255,255,0.08);
 }
 
+/* Neumorphic toggle slider */
+.nm-toggle {
+    --nm-bg: color-mix(in oklab, var(--bg-body) 98%, #fff 2%);
+    --nm-shadow-light: rgba(255,255,255,0.9);
+    --nm-shadow-dark: rgba(0,0,0,0.25);
+    /* Accent color is set per theme below to match the reference screenshots */
+    --nm-accent: #8B5CF6; /* default (dark) */
+    -webkit-tap-highlight-color: transparent;
+}
+.nm-toggle { display: inline-flex; align-items: center; justify-content: center; width: 84px; height: 30px; padding: 0; border: none; background: transparent; cursor: pointer; border-radius: 999px; position: relative; }
+.nm-toggle .nm-track { position: relative; width: 100%; height: 100%; border-radius: 999px; background: var(--nm-bg); box-shadow:
+    inset 0 0 0 1px color-mix(in oklab, var(--text-primary) 6%, transparent);
+    transition: background-color .25s ease, box-shadow .25s ease;
+}
+/* Fill sits opposite the thumb to match the mock (right for light, left for dark) */
+.nm-toggle .nm-fill { position: absolute; inset: 4px 4px 4px 32px; border-radius: 999px; background: linear-gradient(180deg, color-mix(in oklab, var(--nm-accent) 92%, #fff 8%), var(--nm-accent)); box-shadow: inset 0 1px 2px rgba(255,255,255,.35), inset 0 -1px 2px rgba(0,0,0,.2); opacity: 1; transition: inset .32s cubic-bezier(0.2, 0.8, 0.2, 1), opacity .25s ease, background-color .25s ease; }
+.nm-toggle .nm-thumb { position: absolute; top: 50%; left: 4px; width: 36px; height: 36px; transform: translateY(-50%); border-radius: 50%; background: var(--nm-bg); box-shadow:
+    inset 0 0 0 1px color-mix(in oklab, var(--text-primary) 6%, transparent);
+    display: grid; place-items: center; transition: left .32s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow .25s ease, background-color .25s ease; will-change: left; }
+.nm-toggle .nm-icon { font-size: 16px; line-height: 1; pointer-events: none; transition: transform .25s ease, opacity .25s ease; }
+
+/* State: when aria-checked=true (dark mode active) */
+.nm-toggle[aria-checked="true"] .nm-fill { inset: 4px 32px 4px 4px; }
+.nm-toggle[aria-checked="true"] .nm-thumb { left: 44px; }
+.nm-toggle[aria-checked="true"] .nm-icon { transform: rotate(20deg); }
+
+/* Theme-aware tweaks */
+html[data-theme="dark"] .nm-toggle { --nm-bg: #0f0f0f; --nm-shadow-light: rgba(255,255,255,0.06); --nm-shadow-dark: rgba(0,0,0,0.6); --nm-accent: #8B5CF6; /* vivid purple */ }
+html[data-theme="light"] .nm-toggle { --nm-bg: #ECECEC; --nm-shadow-light: rgba(255,255,255,1); --nm-shadow-dark: rgba(0,0,0,0.15); --nm-accent: #FFA726; /* rich orange */ }
+
+/* Focus and press feedback */
+.nm-toggle:focus-visible .nm-thumb { box-shadow:
+    0 0 0 4px color-mix(in oklab, var(--nm-accent) 25%, transparent),
+    inset 0 0 0 1px color-mix(in oklab, var(--text-primary) 6%, transparent);
+}
+.nm-toggle:active .nm-thumb { box-shadow:
+    0 0 0 2px color-mix(in oklab, var(--nm-accent) 35%, transparent),
+    inset 0 0 0 1px color-mix(in oklab, var(--text-primary) 6%, transparent);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .nm-toggle .nm-fill { transition: none; }
+    .nm-toggle .nm-thumb { transition: none; }
+    .nm-toggle .nm-icon { transition: none; }
+}
+
 /* Custom styles for the home page */
 @layer components {
     /* Hero overlay based on theme */
@@ -112,14 +161,11 @@
     }
 
     /* Experience cards (food & cultural) base + dynamic contrast variant */
-    .experience-card { color: #ffffff; }
-    .experience-card h3, .experience-card p, .experience-card span { color: #ffffff; }
+    .experience-card { color: var(--text-primary); }
     .experience-card.on-light-bg h3,
     .experience-card.on-light-bg p,
     .experience-card.on-light-bg span,
-    .experience-card.on-light-bg .chip,
-    .experience-card.on-light-bg .text-white,
-    .experience-card.on-light-bg [style*="color: var(--text-secondary)"] {
+    .experience-card.on-light-bg .chip {
         color: #111 !important;
         -webkit-text-fill-color: #111 !important;
     }
@@ -201,6 +247,24 @@
     }
     #map-container #id .map-region { fill: #f97316; /* orange-500 */ }
     #map-container #ph .map-region { fill: #22c55e; /* green-500 */ }
+
+        /* Floating background shapes (non-obstructive, 3D) */
+        .floating-shapes { position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; perspective: 1100px; perspective-origin: 50% 40%; transform-style: preserve-3d; }
+        .fs-shape { position: absolute; display: block; left: var(--x, 50%); top: var(--y, 50%); width: var(--size, 200px); height: var(--size, 200px);
+                transform: translate(-50%, -50%) translateZ(var(--z, -260px)) rotateX(14deg) rotateY(-18deg) rotateZ(0deg);
+                filter: blur(var(--blur, 2px)); opacity: var(--alpha, .08); will-change: transform, opacity; animation: float3d var(--dur, 40s) ease-in-out infinite alternate;
+        }
+        .fs-shape::after { content: ""; position: absolute; inset: -10%; border-radius: inherit; pointer-events: none; background: radial-gradient( circle at 30% 30%, rgba(255,255,255,0.18), rgba(255,255,255,0) 45% ); mix-blend-mode: screen; }
+        .fs-shape.sphere { border-radius: 9999px; background: radial-gradient( circle at 35% 35%, color-mix(in oklab, var(--turquoise) 60%, transparent), color-mix(in oklab, var(--sunset) 50%, transparent) ); box-shadow: 0 18px 60px rgba(0,0,0,0.18), inset 0 10px 22px rgba(255,255,255,0.12); }
+        .fs-shape.cube { border-radius: var(--radius, 16px); background: linear-gradient(135deg, color-mix(in oklab, var(--palm) 60%, transparent), color-mix(in oklab, var(--turquoise) 40%, transparent)); box-shadow: 0 16px 50px rgba(0,0,0,0.16), inset 0 1px 0 rgba(255,255,255,0.22); }
+        .fs-shape.pill { height: var(--thick, 140px); width: var(--size, 320px); border-radius: 99px; background: linear-gradient(90deg, color-mix(in oklab, var(--grad-alt-from) 55%, transparent), color-mix(in oklab, var(--grad-alt-to) 45%, transparent)); box-shadow: 0 20px 60px rgba(0,0,0,0.18), inset 0 1px 0 rgba(255,255,255,0.22); }
+        @keyframes float3d {
+            0% { transform: translate(calc(-50% + 0px), calc(-50% + 0px)) translateZ(calc(var(--z, -260px) - 20px)) rotateX(12deg) rotateY(-16deg) rotateZ(0deg); opacity: var(--alpha, .08); }
+            100% { transform: translate(calc(-50% + var(--dx, 40px)), calc(-50% + var(--dy, 40px))) translateZ(calc(var(--z, -260px) + 40px)) rotateX(18deg) rotateY(-8deg) rotateZ(6deg); opacity: calc(var(--alpha, .08) + 0.02); }
+        }
+
+        /* Footer: transparent background */
+        footer { background: transparent !important; }
 }
 
 @layer utilities {
@@ -228,6 +292,12 @@ img {
 img[data-loading] {
     opacity: 0;
 }
+
+/* Global custom cursor: white filled circle */
+body.use-app-cursor, body.use-app-cursor * { cursor: none !important; }
+#app-cursor { width: 18px; height: 18px; border-radius: 50%; background: #fff; box-shadow: 0 2px 8px rgba(0,0,0,0.25); transition: transform 40ms linear; }
+html[data-theme="dark"] #app-cursor { background: #fff; }
+html[data-theme="light"] #app-cursor { background: #ffffff; }
 
 /* Ken Burns keyframes for hero */
 @keyframes kenburns {
@@ -315,6 +385,7 @@ html[data-theme="light"] section#culinary { background: transparent; }
 html[data-theme="light"] section#cultural { background: transparent; }
 html[data-theme="light"] section#map { background: transparent; }
 
+
 /* Light mode: keep nav and hero text white over hero backgrounds */
 html[data-theme="light"] [data-theme-nav] { --text-primary: #ffffff; --text-secondary: #e5e7eb; }
 html[data-theme="light"] #hero-carousel { --text-primary: #ffffff; --text-secondary: #e5e7eb; }
@@ -338,3 +409,5 @@ html[data-theme="light"] #hero-carousel { --text-primary: #ffffff; --text-second
     width: clamp(260px, 32vw, 420px);
   }
 }
+
+/* Modal styles served from public/css/modal.css */
