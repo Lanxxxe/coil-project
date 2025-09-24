@@ -110,6 +110,23 @@
         border-radius: 1rem; /* 16px */
         overflow: hidden;
     }
+
+    /* Experience cards (food & cultural) base + dynamic contrast variant */
+    .experience-card { color: var(--text-primary); }
+    .experience-card.on-light-bg h3,
+    .experience-card.on-light-bg p,
+    .experience-card.on-light-bg span,
+    .experience-card.on-light-bg .chip {
+        color: #111 !important;
+        -webkit-text-fill-color: #111 !important;
+    }
+    .experience-card.on-light-bg .chip {
+        background: rgba(0,0,0,0.35);
+        color: #fff !important; /* keep chips legible */
+    }
+    .experience-card.on-light-bg .badge {
+        filter: brightness(0.95) contrast(1.1);
+    }
     
     .gradient-text {
         background: linear-gradient(135deg, var(--grad-text-from), var(--grad-text-via), var(--grad-text-to));
