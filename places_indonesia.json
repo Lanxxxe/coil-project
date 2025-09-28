@@ -1,0 +1,202 @@
+[
+  {
+    "name": "Borobudur Temple",
+    "description": "The world's largest Buddhist temple, built in the 9th century and a UNESCO World Heritage site.",
+    "latitude": -7.607958,
+    "longitude": 110.203824,
+    "type": "Heritage",
+    "country": "Magelang, Central Java, Indonesia",
+    "caption": "A majestic symbol of Buddhist heritage.",
+    "filename": "borobudur.png"
+  },
+  {
+    "name": "Prambanan Temple",
+    "description": "A 9th-century Hindu temple compound dedicated to the Trimurti: Brahma, Vishnu, and Shiva.",
+    "type": "Heritage",
+    "country": "Sleman, Yogyakarta, Indonesia",
+    "latitude": -7.752016, 
+    "longitude": 110.491456,
+    "caption": "An iconic masterpiece of Hindu architecture.",
+    "filename" : "prambanan.png"
+  },
+  {
+    "name": "Bali Tanah Lot Temple",
+    "description": "A stunning rock formation with a sea temple perched on top, famous for sunset views.",
+    "type": "Heritage",
+    "country": "Tabanan, Bali, Indonesia",
+    "latitude": -8.621229, 
+    "longitude": 115.086885,
+    "caption": "A spiritual temple with breathtaking sunsets.",
+    "filename" : "tanahlot.png"
+  },
+  {
+    "name": "Mount Bromo",
+    "description": "An active volcano known for its dramatic landscapes and sunrise views.",
+    "type": "Natural Heritage",
+    "country": "East Java, Indonesia",
+    "latitude" : -7.942069,
+    "longitude" : 112.952977,
+    "caption": "A mystical sunrise above the volcano.",
+    "filename" : "mountbromo.png"
+  },
+  {
+    "name": "Komodo National Park",
+    "description": "Home of the famous Komodo dragons, with islands and stunning marine biodiversity.",
+    "type": "Heritage",
+    "country": "East Nusa Tenggara, Indonesia",
+    "latitude" : -8.589191, 
+    "longitude" : 119.462412,
+    "caption": "A land of dragons and untouched beauty.",
+    "filename" : "komodopark.png"
+  },
+  {
+    "name": "Ubud Monkey Forest",
+    "description": "A sacred forest sanctuary inhabited by hundreds of monkeys, with temples and lush greenery.",
+    "type": "Heritage",
+    "country": "Ubud, Bali, Indonesia",
+    "latitude" : -8.519012,
+    "longitude" : 115.262951,
+    "caption": "A peaceful jungle where monkeys roam free.",
+    "filename" : "ubudforest.png"
+  },
+  {
+    "name": "Taman Mini Indonesia Indah",
+    "description": "A cultural park showcasing Indonesia's diverse heritage and architecture.",
+    "type": "Heritage Park",
+    "country": "Jakarta, Indonesia",
+    "latitude": -6.2925,
+    "longitude": 106.8956,
+    "caption": "Discover the rich culture of Indonesia in one place.",
+    "filename": "tamanindah.png"
+  },
+  {
+    "name": "Istiqlal Mosque",
+    "description": "The largest mosque in Southeast Asia, symbolizing Indonesian independence.",
+    "type": "Heritage",
+    "country": "Jakarta, Indonesia",
+    "latitude": -6.1705,
+    "longitude": 106.8307,
+    "caption": "A grand mosque of unity and faith.",
+    "filename": "istiqlalmosque.png"
+  },
+  {
+    "name": "Borobudur Museum",
+    "description": "A museum displaying archaeological artifacts from the Borobudur temple area.",
+    "type": "Museum",
+    "country": "Magelang, Central Java, Indonesia",
+    "latitude": -7.6075,
+    "longitude": 110.2033,
+    "caption": "Unveiling the stories behind Borobudur.",
+    "filename": "borobudurmuseum.png"
+  },
+  {
+    "name": "Jakarta National Monument (Monas)",
+    "description": "A 132-meter monument symbolizing Indonesia's struggle for independence.",
+    "type": "Heritage",
+    "country": "Jakarta, Indonesia",
+    "latitude": -6.1754,
+    "longitude": 106.8272,
+    "caption": "Standing tall as Indonesia's freedom symbol.",
+    "filename": "monas.png"
+  },
+  {
+    "name": "Wayang Museum",
+    "description": "A museum dedicated to Indonesia's traditional shadow puppetry art.",
+    "type": "Museum",
+    "country": "Jakarta, Indonesia",
+    "latitude": -6.1744,
+    "longitude": 106.8227,
+    "caption": "Experience the magic of wayang puppetry.",
+    "filename": "wayangmuseum.png"
+  },
+  {
+    "name": "Bali Uluwatu Temple",
+    "description": "A cliff-top temple overlooking the Indian Ocean, famous for Kecak dance performances.",
+    "type": "Heritage",
+    "country": "Bali, Indonesia",
+    "latitude": -8.8291,
+    "longitude": 115.0880,
+    "caption": "Sacred cliffs meet cultural performances.",
+    "filename": "uluwatutemple.png"
+  },
+  {
+    "name": "Raja Ampat Islands",
+    "description": "An archipelago with some of the richest marine biodiversity in the world.",
+    "type": "Natural Heritage",
+    "country": "West Papua, Indonesia",
+    "latitude": -0.2333,
+    "longitude": 130.6167,
+    "caption": "A diver's paradise with crystal-clear waters.",
+    "filename": "rajaampat.png"
+  },
+  {
+    "name": "Taman Sari Water Castle",
+    "description": "A former royal garden and bathing complex of the Sultanate of Yogyakarta.",
+    "type": "Heritage",
+    "country": "Yogyakarta, Indonesia",
+    "latitude": -7.7900,
+    "longitude": 110.3630,
+    "caption": "Echoes of royal luxury and history.",
+    "filename": "tamansari.png"
+  },
+  {
+    "name": "Bandung Geological Museum",
+    "description": "A museum showcasing fossils, minerals, and geological history of Indonesia.",
+    "type": "Museum",
+    "country": "Bandung, West Java, Indonesia",
+    "latitude": -6.9147,
+    "longitude": 107.6098,
+    "caption": "Explore Indonesia's ancient earth story.",
+    "filename": "bandungmuseum.png"
+  },
+  {
+    "name": "Toba Lake",
+    "description": "The largest volcanic lake in the world, with Samosir Island at its center.",
+    "type": "Natural Heritage",
+    "country": "North Sumatra, Indonesia",
+    "latitude": 2.7150,
+    "longitude": 98.8820,
+    "caption": "A serene volcanic lake with rich Batak culture.",
+    "filename": "tobalake.png"
+  },
+  {
+    "name": "Maimun Palace",
+    "description": "A royal palace of the Deli Sultanate with a blend of Malay, Mughal, and Italian architecture.",
+    "type": "Heritage",
+    "country": "Medan, North Sumatra, Indonesia",
+    "latitude": 3.5952,
+    "longitude": 98.6722,
+    "caption": "A regal landmark of Medan's heritage.",
+    "filename": "maimunpalace.png"
+  },
+  {
+    "name": "Makassar Fort Rotterdam",
+    "description": "A 17th-century Dutch fort and cultural heritage site in Makassar.",
+    "type": "Heritage",
+    "country": "Makassar, South Sulawesi, Indonesia",
+    "latitude": -5.1342,
+    "longitude": 119.5000,
+    "caption": "A historic fortress by the sea.",
+    "filename": "fortrotterdam.png"
+  },
+  {
+    "name": "Bali Neka Art Museum",
+    "description": "A museum housing traditional and modern Balinese art collections.",
+    "type": "Museum",
+    "country": "Ubud, Bali, Indonesia",
+    "latitude": -8.5069,
+    "longitude": 115.2623,
+    "caption": "Celebrating the beauty of Balinese art.",
+    "filename": "balinekamuseum.png"
+  },
+  {
+    "name": "Gili Islands",
+    "description": "A trio of small islands known for white-sand beaches and coral reefs.",
+    "type": "Natural Heritage",
+    "country": "Lombok, West Nusa Tenggara, Indonesia",
+    "latitude": -8.3500,
+    "longitude": 116.0333,
+    "caption": "A tropical escape with crystal waters.",
+    "filename": "giliislands.png"
+  }
+]

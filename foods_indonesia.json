@@ -1,0 +1,182 @@
+[
+  {
+    "name": "Nasi Goreng",
+    "origin": "Nationwide (Indonesia)",
+    "category": "Main Dish",
+    "price": "IDR 20,000 - 40,000",
+    "description": "Indonesia's version of fried rice, cooked with sweet soy sauce, spices, and served with fried egg or satay.",
+    "caption": "A flavorful fried rice loved by all Indonesians.",
+    "filename": "nasigoreng.png"
+  },
+  {
+    "name": "Rendang",
+    "origin": "West Sumatra (Minangkabau)",
+    "category": "Main Dish",
+    "price": "IDR 30,000 - 60,000",
+    "description": "A slow-cooked beef dish with rich coconut milk and spices, considered one of the most delicious foods in the world.",
+    "caption": "Tender beef simmered in rich spices.",
+    "filename": "rendang.png"
+  },
+  {
+    "name": "Sate Ayam",
+    "origin": "Java",
+    "category": "Street Food",
+    "price": "IDR 15,000 - 30,000",
+    "description": "Grilled chicken skewers served with peanut sauce, often found in street stalls and restaurants.",
+    "caption": "Juicy grilled skewers with nutty sauce.",
+    "filename": "sateayam.png"
+  },
+  {
+    "name": "Gado-Gado",
+    "origin": "Jakarta (Betawi)",
+    "category": "Salad",
+    "price": "IDR 20,000 - 35,000",
+    "description": "A vegetable salad with peanut sauce, boiled eggs, and rice cakes.",
+    "caption": "Indonesia's healthy salad with peanut twist.",
+    "filename": "gadogado.png"
+  },
+  {
+    "name": "Bakso",
+    "origin": "Java",
+    "category": "Soup",
+    "price": "IDR 15,000 - 30,000",
+    "description": "Meatball soup served with noodles, tofu, and vegetables in a savory broth.",
+    "caption": "Warm comfort in a bowl of meatball soup.",
+    "filename": "bakso.png"
+  },
+  {
+    "name": "Soto Ayam",
+    "origin": "Java",
+    "category": "Soup",
+    "price": "IDR 15,000 - 30,000",
+    "description": "A traditional chicken soup flavored with turmeric, served with vermicelli, eggs, and lime.",
+    "caption": "Golden chicken soup with a tangy kick.",
+    "filename": "sotoayam.png"
+  },
+  {
+    "name": "Nasi Padang",
+    "origin": "West Sumatra",
+    "category": "Main Dish",
+    "price": "IDR 25,000 - 50,000",
+    "description": "Steamed rice served with a variety of spicy dishes, curries, and fried specialties.",
+    "caption": "A feast of flavors on one plate.",
+    "filename": "nasipadang.png"
+  },
+  {
+    "name": "Pempek",
+    "origin": "Palembang, South Sumatra",
+    "category": "Snack",
+    "price": "IDR 10,000 - 25,000",
+    "description": "Savory fish cakes served with sweet and tangy vinegar sauce.",
+    "caption": "Chewy fish cakes with zesty sauce.",
+    "filename": "pempek.png"
+  },
+  {
+    "name": "Rawon",
+    "origin": "East Java",
+    "category": "Soup",
+    "price": "IDR 25,000 - 40,000",
+    "description": "Beef soup with a rich, dark broth flavored with keluak nuts.",
+    "caption": "A deep, earthy beef soup from Java.",
+    "filename": "rawon.png"
+  },
+  {
+    "name": "Ayam Betutu",
+    "origin": "Bali",
+    "category": "Main Dish",
+    "price": "IDR 40,000 - 70,000",
+    "description": "Chicken slow-cooked with Balinese spices and wrapped in banana leaves.",
+    "caption": "A Balinese delicacy full of aroma.",
+    "filename": "ayambetutu.png"
+  },
+  {
+    "name": "Gudeg",
+    "origin": "Yogyakarta",
+    "category": "Main Dish",
+    "price": "IDR 25,000 - 45,000",
+    "description": "A sweet jackfruit stew cooked with coconut milk and palm sugar.",
+    "caption": "Sweet and savory jackfruit specialty.",
+    "filename": "gudeg.png"
+  },
+  {
+    "name": "Coto Makassar",
+    "origin": "South Sulawesi",
+    "category": "Soup",
+    "price": "IDR 25,000 - 50,000",
+    "description": "Traditional beef soup with rich spices, often served with ketupat rice cakes.",
+    "caption": "Makassar's rich and spicy beef soup.",
+    "filename": "cotomakassar.png"
+  },
+  {
+    "name": "Kerak Telor",
+    "origin": "Jakarta (Betawi)",
+    "category": "Street Food",
+    "price": "IDR 15,000 - 30,000",
+    "description": "A savory omelet made with glutinous rice, egg, and fried shallots.",
+    "caption": "Crispy Betawi-style rice omelet.",
+    "filename": "keraktelor.png"
+  },
+  {
+    "name": "Martabak Manis",
+    "origin": "Java",
+    "category": "Dessert",
+    "price": "IDR 20,000 - 40,000",
+    "description": "A thick sweet pancake filled with chocolate, cheese, and condensed milk.",
+    "caption": "Sweet pancake with indulgent fillings.",
+    "filename": "martabakmanis.png"
+  },
+  {
+    "name": "Es Cendol",
+    "origin": "West Java",
+    "category": "Dessert/Drink",
+    "price": "IDR 10,000 - 20,000",
+    "description": "A refreshing iced dessert made with green rice flour jelly, coconut milk, and palm sugar syrup.",
+    "caption": "Cool and sweet green jelly drink.",
+    "filename": "escendol.png"
+  },
+  {
+    "name": "Es Teler",
+    "origin": "Central Java",
+    "category": "Dessert/Drink",
+    "price": "IDR 12,000 - 25,000",
+    "description": "A fruit cocktail dessert with avocado, jackfruit, young coconut, and sweetened milk.",
+    "caption": "A fruity ice dessert to beat the heat.",
+    "filename": "esteler.png"
+  },
+  {
+    "name": "Ayam Penyet",
+    "origin": "East Java",
+    "category": "Main Dish",
+    "price": "IDR 20,000 - 40,000",
+    "description": "Fried chicken smashed and served with spicy sambal, tofu, and tempeh.",
+    "caption": "Crispy chicken with fiery sambal.",
+    "filename": "ayampenyet.png"
+  },
+  {
+    "name": "Bebek Goreng",
+    "origin": "Java",
+    "category": "Main Dish",
+    "price": "IDR 30,000 - 60,000",
+    "description": "Crispy fried duck served with sambal and rice.",
+    "caption": "Golden crispy duck, a Javanese favorite.",
+    "filename": "bebekgoreng.png"
+  },
+  {
+    "name": "Lontong Sayur",
+    "origin": "Jakarta (Betawi)",
+    "category": "Breakfast Dish",
+    "price": "IDR 15,000 - 30,000",
+    "description": "Rice cakes served in coconut milk vegetable stew.",
+    "caption": "A hearty breakfast with coconut flavor.",
+    "filename": "lontongsayur.png"
+  },
+  {
+    "name": "Sop Buntut",
+    "origin": "Java",
+    "category": "Soup",
+    "price": "IDR 40,000 - 70,000",
+    "description": "An oxtail soup cooked with spices, vegetables, and clear broth.",
+    "caption": "Rich and savory oxtail soup.",
+    "filename": "sopbuntut.png"
+  }
+]

@@ -1,0 +1,181 @@
+[
+  {
+    "name": "Adobo",
+    "origin": "Nationwide (Philippines)",
+    "category": "Main Dish",
+    "description": "A savory stew of chicken or pork marinated in soy sauce, vinegar, garlic, and spices.",
+    "caption": "The unofficial national dish of the Philippines.",
+    "price": "PHP 120 - 250",
+    "filename": "adobo.png"
+  },
+  {
+    "name": "Sinigang",
+    "origin": "Nationwide (Philippines)",
+    "category": "Soup",
+    "description": "A sour tamarind-based soup with pork, shrimp, or fish and mixed vegetables.",
+    "caption": "A comforting bowl of sour and savory flavors.",
+    "price": "PHP 150 - 280",
+    "filename": "sinigang.png"
+  },
+  {
+    "name": "Lechon",
+    "origin": "Cebu",
+    "category": "Main Dish",
+    "description": "A whole roasted pig with crispy skin and tender meat, often served at feasts.",
+    "caption": "Crispy, juicy, and a true fiesta star.",
+    "price": "PHP 350 - 500 per kilo",
+    "filename": "lechon.png"
+  },
+  {
+    "name": "Kare-Kare",
+    "origin": "Pampanga",
+    "category": "Main Dish",
+    "description": "A peanut-based stew with oxtail, tripe, and vegetables, served with bagoong (shrimp paste).",
+    "caption": "A rich peanut stew best with shrimp paste.",
+    "price": "PHP 200 - 350",
+    "filename": "karekare.png"
+  },
+  {
+    "name": "Laing",
+    "origin": "Bicol Region",
+    "category": "Main Dish",
+    "description": "Taro leaves cooked in coconut milk and chili peppers.",
+    "caption": "Spicy coconut goodness from Bicol.",
+    "price": "PHP 100 - 180",
+    "filename": "laing.png"
+  },
+  {
+    "name": "Pancit Canton",
+    "origin": "Nationwide (Chinese-Filipino Influence)",
+    "category": "Noodles",
+    "description": "Stir-fried egg noodles with vegetables, soy sauce, and meat or seafood.",
+    "caption": "A noodle dish for every celebration.",
+    "price": "PHP 120 - 220",
+    "filename": "pancitcanton.png"
+  },
+  {
+    "name": "Halo-Halo",
+    "origin": "Nationwide (Philippines)",
+    "category": "Dessert",
+    "description": "A shaved ice dessert with sweetened fruits, jellies, leche flan, and purple yam.",
+    "caption": "A colorful and refreshing summer treat.",
+    "price": "PHP 100 - 180",
+    "filename": "halohalo.png"
+  },
+  {
+    "name": "Bibingka",
+    "origin": "Nationwide (Christmas Tradition)",
+    "category": "Dessert",
+    "description": "A rice cake baked in banana leaves, topped with salted egg and cheese.",
+    "caption": "A warm holiday rice cake favorite.",
+    "price": "PHP 50 - 120",
+    "filename": "bibingka.png"
+  },
+  {
+    "name": "Putobumbong",
+    "origin": "Nationwide (Christmas Tradition)",
+    "category": "Dessert",
+    "description": "A purple sticky rice delicacy steamed in bamboo tubes, topped with coconut and sugar.",
+    "caption": "Christmas wouldn’t be complete without this.",
+    "price": "PHP 40 - 100",
+    "filename": "putobumbong.png"
+  },
+  {
+    "name": "Sisig",
+    "origin": "Pampanga",
+    "category": "Main Dish",
+    "description": "A sizzling dish made of chopped pig’s head, liver, and spices, often served with egg.",
+    "caption": "A sizzling Pampanga delicacy.",
+    "price": "PHP 150 - 250",
+    "filename": "sisig.png"
+  },
+  {
+    "name": "Bulalo",
+    "origin": "Batangas",
+    "category": "Soup",
+    "description": "A beef marrow stew with corn, cabbage, and potatoes in a clear broth.",
+    "caption": "A hearty beef bone marrow soup.",
+    "price": "PHP 250 - 400",
+    "filename": "bulalo.png"
+  },
+  {
+    "name": "Batchoy",
+    "origin": "Iloilo",
+    "category": "Noodles",
+    "description": "A noodle soup with pork, liver, chicharrón, and egg in a savory broth.",
+    "caption": "Iloilo's iconic noodle comfort food.",
+    "price": "PHP 80 - 150",
+    "filename": "batchoy.png"
+  },
+  {
+    "name": "Inasal",
+    "origin": "Bacolod",
+    "category": "Main Dish",
+    "description": "Grilled chicken marinated in calamansi, vinegar, and annatto oil.",
+    "caption": "Juicy grilled chicken Bacolod-style.",
+    "price": "PHP 120 - 200",
+    "filename": "inasal.png"
+  },
+  {
+    "name": "Dinuguan",
+    "origin": "Nationwide (Philippines)",
+    "category": "Main Dish",
+    "description": "A savory stew made from pork offal simmered in pig’s blood, vinegar, and spices.",
+    "caption": "Rich and bold flavors in a dark stew.",
+    "price": "PHP 100 - 180"
+  },
+  {
+    "name": "Taho",
+    "origin": "Nationwide (Philippines)",
+    "category": "Snack",
+    "description": "A warm snack made of soft tofu, arnibal (caramelized sugar syrup), and tapioca pearls.",
+    "caption": "A sweet and silky morning favorite.",
+    "price": "PHP 20 - 50",
+    "filename": "taho.png"
+  },
+  {
+    "name": "Turon",
+    "origin": "Nationwide (Philippines)",
+    "category": "Snack/Dessert",
+    "description": "A deep-fried spring roll filled with banana and jackfruit, coated in caramelized sugar.",
+    "caption": "Crispy, sweet banana fritter rolls.",
+    "price": "PHP 15 - 40",
+    "filename": "turon.png"
+  },
+  {
+    "name": "Chicharrón",
+    "origin": "Nationwide (Spanish Influence)",
+    "category": "Snack",
+    "description": "Crispy deep-fried pork rinds, often served as pulutan (beer snack).",
+    "caption": "Crunchy pork snack perfect with drinks.",
+    "price": "PHP 50 - 150",
+    "filename": "chicharron.png"
+  },
+  {
+    "name": "Lumpiang Shanghai",
+    "origin": "Nationwide (Chinese-Filipino Influence)",
+    "category": "Snack/Appetizer",
+    "description": "Deep-fried spring rolls filled with ground pork and vegetables.",
+    "caption": "Crispy spring rolls loved at parties.",
+    "price": "PHP 100 - 200 per serving",
+    "filename": "lumpiang-shanghai.png"
+  },
+  {
+    "name": "Pinakbet",
+    "origin": "Ilocos Region",
+    "category": "Main Dish",
+    "description": "A vegetable stew made with bagoong (fermented shrimp paste) and mixed vegetables.",
+    "caption": "Ilocano’s healthy vegetable dish.",
+    "price": "PHP 120 - 200",
+    "filename": "pinakbet.png"
+  },
+  {
+    "name": "Longganisa",
+    "origin": "Vigan & Lucban (various regions)",
+    "category": "Breakfast Dish",
+    "description": "Filipino-style sausages with regional variations, often garlicky or sweet.",
+    "caption": "Savory sausages with local flair.",
+    "price": "PHP 100 - 180",
+    "filename": "longganisa.png"
+  }
+]
