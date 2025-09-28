@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FoodController;
 use App\Http\Controllers\PlacesController;
+use App\Http\Controllers\GeoController;
 
 /*
 |--------------------------------------------------------------------------
@@ -102,4 +103,10 @@ Route::prefix('places')->group(function () {
     
     // Advanced search with photos
     Route::post('/advanced-search', [PlacesController::class, 'advancedSearch']);
+
+    // Get top places by country and region
+    Route::get('/by-region', [PlacesController::class, 'getByCountryRegion']);
 });
+
+// Geo boundaries proxy (same-origin)
+Route::get('/geo/adm1', [GeoController::class, 'adm1']);

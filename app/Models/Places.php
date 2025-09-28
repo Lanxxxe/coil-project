@@ -13,6 +13,7 @@ class Places extends Model
     protected $primaryKey = 'place_id';
     protected $fillable = [
         'name',
+    'slug',
         'description',
         'latitude',
         'longitude',
@@ -38,6 +39,17 @@ class Places extends Model
         return $this->hasMany(PlacesPhoto::class, 'place_id', 'place_id');
     }
 
+    protected static function boot()
+    {
+        parent::boot();
+        static::saving(function (Places $place) {
+            if (!$place->slug && $place->name) {
+                $base = \Illuminate\Support\Str::slug($place->name);
+                $place->slug = $base ?: null;
+            }
+        });
+    }
+
     
     // Get specific place using the name of the place (with photos)
     public static function getByNameWithPhotos(string $name): ?Places
@@ -50,6 +62,11 @@ class Places extends Model
     public static function getByNameLikeWithPhotos(string $name): ?Places
     {
         return self::with('photos')->where('name', 'LIKE', '%' . $name . '%')->first();
+    }
+
+    public static function getBySlugWithPhotos(string $slug): ?Places
+    {
+        return self::with('photos')->where('slug', $slug)->first();
     }
 
     
@@ -187,5 +204,20 @@ class Places extends Model
         }
 
         return $query->get();
+    }
+
+    // Get top N places by country and region substring (with photos)
+    public static function getTopByCountryRegion(string $country, string $region, int $limit = 3): Collection
+    {
+        return self::with('photos')
+            ->where('country', $country)
+            ->where(function($q) use ($region) {
+                $q->where('location', 'LIKE', '%' . $region . '%')
+                  ->orWhere('name', 'LIKE', '%' . $region . '%')
+                  ->orWhere('caption', 'LIKE', '%' . $region . '%');
+            })
+            ->orderBy('name')
+            ->limit($limit)
+            ->get();
     }
 }

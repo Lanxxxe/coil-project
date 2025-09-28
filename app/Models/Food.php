@@ -14,6 +14,7 @@ class Food extends Model
 
     protected $fillable = [
         'name',
+        'slug',
         'description',
         'place_of_origin',
         'image_url',
@@ -30,11 +31,27 @@ class Food extends Model
         'updated_at' => 'datetime',
     ];
 
+    protected static function boot()
+    {
+        parent::boot();
+        static::saving(function (Food $food) {
+            if (!$food->slug && $food->name) {
+                $base = \Illuminate\Support\Str::slug($food->name);
+                $food->slug = $base ?: null;
+            }
+        });
+    }
+
 
     // Get specific food using the name of the food
     public static function getByName(string $name): ?Food
     {
         return self::where('name', $name)->first();
+    }
+
+    public static function getBySlug(string $slug): ?Food
+    {
+        return self::where('slug', $slug)->first();
     }
 
     

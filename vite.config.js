@@ -10,4 +10,17 @@ export default defineConfig({
         }),
         tailwindcss(),
     ],
+    build: {
+        rollupOptions: {
+            output: {
+                manualChunks(id) {
+                    // Put MapLibre and its CSS into a dedicated chunk
+                    if (id.includes('node_modules/maplibre-gl') || id.includes('maplibre-gl/dist/maplibre-gl.css')) {
+                        return 'vendor-maplibre';
+                    }
+                    // Optionally split other heavy vendor libs here later
+                },
+            },
+        },
+    },
 });

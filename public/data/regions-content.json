@@ -1,0 +1,81 @@
+{
+  "ph": {
+    "ilocos region": { "spot": "Pagudpud (Saud Beach)", "food": "Ilocos Empanada" },
+    "cagayan valley": { "spot": "Callao Cave (Cagayan)", "food": "Pancit Batil Patung" },
+    "central luzon": { "spot": "Mount Pinatubo Crater Lake", "food": "Sisig (Pampanga)" },
+    "calabarzon": { "spot": "Taal Volcano (Tagaytay/Talisay)", "food": "Bulalo (Tagaytay)" },
+    "mimaropa": { "spot": "Puerto Princesa Underground River", "food": "Tamilok" },
+    "bicol region": { "spot": "Mayon Volcano (Albay)", "food": "Bicol Express" },
+    "western visayas": { "spot": "White Beach (Boracay)", "food": "La Paz Batchoy" },
+    "central visayas": { "spot": "Kawasan Falls (Cebu)", "food": "Lechon Cebu" },
+    "eastern visayas": { "spot": "Kalanggaman Island (Leyte)", "food": "Binagol (Leyte)" },
+    "zamboanga peninsula": { "spot": "Pink Beach (Sta. Cruz Island)", "food": "Satti" },
+    "northern mindanao": { "spot": "Camiguin (White Island)", "food": "Pastel de Camiguin" },
+    "davao region": { "spot": "Samal Island", "food": "Durian Candy" },
+    "soccsksargen": { "spot": "Lake Sebu (Seven Falls)", "food": "Pastil" },
+    "caraga": { "spot": "Siargao (Cloud 9)", "food": "Sayongsong" },
+    "bangsamoro autonomous region in muslim mindanao": { "spot": "Bud Bongao (Tawi-Tawi)", "food": "Tiulah Itum" },
+    "cordillera administrative region": { "spot": "Banaue Rice Terraces", "food": "Pinikpikan" },
+    "national capital region": { "spot": "Intramuros (Manila)", "food": "Halo-halo (Manila style)" },
+    "ncr": { "spot": "Intramuros (Manila)", "food": "Halo-halo (Manila style)" },
+    "car": { "spot": "Banaue Rice Terraces", "food": "Pinikpikan" },
+    "barmm": { "spot": "Bud Bongao (Tawi-Tawi)", "food": "Tiulah Itum" }
+  },
+  "id": {
+    "macro": {
+      "sumatra": { "spot": "Lake Toba (Sumatra Utara)", "food": "Rendang (Padang)" },
+      "java": { "spot": "Borobudur (Central Java)", "food": "Gudeg (Yogyakarta)" },
+      "kalimantan": { "spot": "Tanjung Puting (Orangutans)", "food": "Soto Banjar" },
+      "sulawesi": { "spot": "Tana Toraja (South Sulawesi)", "food": "Coto Makassar" },
+      "bali & nusa tenggara": { "spot": "Uluwatu Temple (Bali)", "food": "Babi Guling (Bali)" },
+      "maluku": { "spot": "Ora Beach (Seram)", "food": "Ikan Kuah Kuning" },
+      "papua": { "spot": "Raja Ampat (West Papua)", "food": "Papeda" }
+    },
+    "province": {
+      "aceh": { "spot": "Baiturrahman Grand Mosque", "food": "Mie Aceh" },
+      "north sumatra": { "spot": "Lake Toba", "food": "Bika Ambon" },
+      "west sumatra": { "spot": "Jam Gadang (Bukittinggi)", "food": "Rendang" },
+      "riau": { "spot": "Siak Palace", "food": "Gonggong" },
+      "riau islands": { "spot": "Barelang Bridge (Batam)", "food": "Otak-otak" },
+      "jambi": { "spot": "Muaro Jambi Temple", "food": "Gulai Tepek Ikan" },
+      "bengkulu": { "spot": "Fort Marlborough", "food": "Pendap" },
+      "south sumatra": { "spot": "Ampera Bridge (Palembang)", "food": "Pempek" },
+      "bangka belitung islands": { "spot": "Lengkuas Island", "food": "Lempah Kuning" },
+      "lampung": { "spot": "Pahawang Island", "food": "Seruit" },
+
+      "banten": { "spot": "Ujung Kulon National Park", "food": "Sate Bandeng" },
+      "jakarta": { "spot": "Old Town (Kota Tua)", "food": "Kerak Telor" },
+      "west java": { "spot": "Kawah Putih (Ciwidey)", "food": "Batagor" },
+      "central java": { "spot": "Borobudur", "food": "Nasi Liwet" },
+      "yogyakarta": { "spot": "Prambanan Temple", "food": "Gudeg" },
+      "east java": { "spot": "Mount Bromo", "food": "Rawon" },
+
+      "west kalimantan": { "spot": "Equator Monument (Pontianak)", "food": "Choipan" },
+      "central kalimantan": { "spot": "Sebangau National Park", "food": "Juhu Umbut Rotan" },
+      "south kalimantan": { "spot": "Lok Baintan Floating Market", "food": "Soto Banjar" },
+      "east kalimantan": { "spot": "Derawan Islands", "food": "Gance Ruan" },
+      "north kalimantan": { "spot": "Kayan Mentarang National Park", "food": "Ikan Bakar" },
+
+      "north sulawesi": { "spot": "Bunaken Marine Park", "food": "Tinutuan" },
+      "gorontalo": { "spot": "Olele Marine Park", "food": "Binte Biluhuta" },
+      "central sulawesi": { "spot": "Togean Islands", "food": "Kaledo" },
+      "west sulawesi": { "spot": "Karampuang Island", "food": "Jepa" },
+      "south sulawesi": { "spot": "Tana Toraja", "food": "Coto Makassar" },
+      "southeast sulawesi": { "spot": "Wakatobi National Park", "food": "Kasuwi" },
+
+      "bali": { "spot": "Uluwatu Temple", "food": "Babi Guling" },
+      "west nusa tenggara": { "spot": "Gili Islands", "food": "Ayam Taliwang" },
+      "east nusa tenggara": { "spot": "Komodo National Park", "food": "Se'i Sapi" },
+
+      "maluku": { "spot": "Ora Beach", "food": "Ikan Kuah Kuning" },
+      "north maluku": { "spot": "Dodola Islands", "food": "Ikan Asar" },
+
+      "papua": { "spot": "Raja Ampat", "food": "Papeda" },
+      "west papua": { "spot": "Arfak Mountains", "food": "Ikan Bakar" },
+      "southwest papua": { "spot": "Raja Ampat (SW)", "food": "Ikan Bakar" },
+      "south papua": { "spot": "Wasur National Park", "food": "Sagu Bakar" },
+      "central papua": { "spot": "Baliem Valley", "food": "Udang Selingkuh" },
+      "highland papua": { "spot": "Puncak Trikora", "food": "Sate Ulat Sagu" }
+    }
+  }
+}

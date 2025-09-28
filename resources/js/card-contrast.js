@@ -1,0 +1,69 @@
+/**
+ * Automatic contrast detection for cards with class .experience-card
+ * Adds .on-light-bg when average luminance of background image > threshold.
+ * Priority of image source:
+ *  1. data-bg-image attribute (string URL)
+ *  2. <img data-card-bg>
+ *  3. first <img> descendant
+ */
+(function(){
+  const cards = document.querySelectorAll('.experience-card');
+  if(!cards.length) return;
+
+  // We only flip to dark text when the bottom area is very bright.
+  const THRESHOLD = 0.75; // 0..1
+
+  function analyze(img, card){
+    if(!img.complete || !img.naturalWidth){
+      img.addEventListener('load', () => analyze(img, card), { once:true });
+      return;
+    }
+    try {
+  // Sample the bottom 40% of the image where text is rendered
+  const sampleW = 64;
+  const sampleH = 16;
+  const sy = Math.floor(img.naturalHeight * 0.60);
+  const sh = Math.max(1, Math.floor(img.naturalHeight * 0.40));
+  const sx = 0;
+  const sw = img.naturalWidth;
+
+  const canvas = document.createElement('canvas');
+  canvas.width = sampleW; canvas.height = sampleH;
+  const ctx = canvas.getContext('2d', { willReadFrequently: true });
+  // drawImage with source rect -> bottom strip scaled into small canvas
+  ctx.drawImage(img, sx, sy, sw, sh, 0, 0, sampleW, sampleH);
+  const data = ctx.getImageData(0,0,sampleW,sampleH).data;
+      let sum = 0; const pixels = data.length / 4;
+      for(let i=0;i<data.length;i+=4){
+        const r = data[i] / 255, g = data[i+1] / 255, b = data[i+2] / 255;
+        sum += 0.2126*r + 0.7152*g + 0.0722*b; // luminance
+      }
+      const avg = sum / pixels;
+  if(avg > THRESHOLD) card.classList.add('on-light-bg'); else card.classList.remove('on-light-bg');
+    } catch(e){ /* silent */ }
+  }
+
+  function sourceFor(card){
+    const attr = card.getAttribute('data-bg-image');
+    if(attr){
+      const img = new Image(); img.src = attr; analyze(img, card); return;
+    }
+    const tagged = card.querySelector('img[data-card-bg]');
+    if(tagged){ analyze(tagged, card); return; }
+    const first = card.querySelector('img');
+    if(first) analyze(first, card);
+  }
+
+  function process(){ cards.forEach(sourceFor); }
+  if('requestIdleCallback' in window){ requestIdleCallback(process, { timeout:1500 }); } else { setTimeout(process, 0); }
+
+  // Observe dynamically added cards
+  const mo = new MutationObserver(muts => {
+    muts.forEach(m => m.addedNodes.forEach(node => {
+      if(!(node instanceof HTMLElement)) return;
+      if(node.matches('.experience-card')) sourceFor(node);
+      node.querySelectorAll?.('.experience-card').forEach(sourceFor);
+    }));
+  });
+  mo.observe(document.body, { childList:true, subtree:true });
+})();

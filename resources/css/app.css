@@ -5,7 +5,409 @@
 @source '../**/*.blade.php';
 @source '../**/*.js';
 
-@theme {
-    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
-        'Segoe UI Symbol', 'Noto Color Emoji';
+:root {
+    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+    /* Map/UI harmony */
+    --map-label: color-mix(in oklab, var(--text-secondary) 92%, transparent);
+    --map-outline: color-mix(in oklab, var(--text-primary) 65%, transparent);
+    /* Default to dark to reduce flash before JS sets theme */
+    --bg-body: #121212; /* dark base */
+    --text-primary: #F5F5F5;
+    --text-secondary: #BDBDBD;
+    --text-muted: #757575;
+    --card-bg: #1E1E1E;
+    --accent-bg: #2A2A2A;
+    --map-bg: #0f0f0f;
+    /* Brand/accents */
+    --sunset: #FF8A65; /* dark variant */
+    --palm: #4CAF50;
+    --turquoise: #26C6DA;
+    --cta: #FFD54F;
+    /* UI */
+    --pill-bg: #111;
+    --pill-active: #FFD54F;
+    --panel-ring: rgba(255,255,255,0.08);
+
+    /* Themed gradients (defaults tuned for dark) */
+    --grad-text-from: var(--palm);
+    --grad-text-via: var(--turquoise);
+    --grad-text-to: var(--cta);
+
+    --grad-section-from: var(--palm);
+    --grad-section-to: var(--turquoise);
+
+    --grad-alt-from: #9b5de5; /* purple */
+    --grad-alt-via: #f15bb5;  /* pink */
+    --grad-alt-to: #ef4444;   /* red */
+
+    --hero-overlay: rgba(0,0,0,0.5);
+    --hero-fallback-1: linear-gradient(to bottom right, #064e3b, #0f766e, #0b3b74);
+    --hero-fallback-2: linear-gradient(to bottom right, #7c2d12, #991b1b, #7f1d1d);
+    --hero-fallback-3: linear-gradient(to bottom right, #0f172a, #111827, #1f2937);
+
+    /* Badges */
+    --badge-text: #111; /* dark text on vibrant backgrounds */
+    --badge-ph-bg: #22c55e; /* emerald-500 */
+    --badge-id-bg: #f97316; /* orange-500 */
+    --badge-chip-bg: rgba(255,255,255,0.2); /* for translucent chips on images */
+
+    /* Minimal surfaces (dark default) */
+    --surface-bg: #000000; /* true black */
+    --surface-border: rgba(255,255,255,0.08);
+    --surface-shadow: 0 8px 24px rgba(0,0,0,0.60);
+    --control-shadow: 0 4px 12px rgba(0,0,0,0.50);
+
+    /* Controls & footer defaults (dark) */
+    --pill-text: #eaeaea;
+    --footer-bg: #1b1b1b;
+    --footer-text: #e5e5e5;
+    --footer-border: rgba(255,255,255,0.08);
 }
+
+/* Neumorphic toggle slider */
+.nm-toggle {
+    --nm-bg: color-mix(in oklab, var(--bg-body) 98%, #fff 2%);
+    --nm-shadow-light: rgba(255,255,255,0.9);
+    --nm-shadow-dark: rgba(0,0,0,0.25);
+    /* Accent color is set per theme below to match the reference screenshots */
+    --nm-accent: #8B5CF6; /* default (dark) */
+    -webkit-tap-highlight-color: transparent;
+}
+.nm-toggle { display: inline-flex; align-items: center; justify-content: center; width: 84px; height: 30px; padding: 0; border: none; background: transparent; cursor: pointer; border-radius: 999px; position: relative; }
+.nm-toggle .nm-track { position: relative; width: 100%; height: 100%; border-radius: 999px; background: var(--nm-bg); box-shadow:
+    inset 0 0 0 1px color-mix(in oklab, var(--text-primary) 6%, transparent);
+    transition: background-color .25s ease, box-shadow .25s ease;
+}
+/* Fill sits opposite the thumb to match the mock (right for light, left for dark) */
+.nm-toggle .nm-fill { position: absolute; inset: 4px 4px 4px 32px; border-radius: 999px; background: linear-gradient(180deg, color-mix(in oklab, var(--nm-accent) 92%, #fff 8%), var(--nm-accent)); box-shadow: inset 0 1px 2px rgba(255,255,255,.35), inset 0 -1px 2px rgba(0,0,0,.2); opacity: 1; transition: inset .32s cubic-bezier(0.2, 0.8, 0.2, 1), opacity .25s ease, background-color .25s ease; }
+.nm-toggle .nm-thumb { position: absolute; top: 50%; left: 4px; width: 36px; height: 36px; transform: translateY(-50%); border-radius: 50%; background: var(--nm-bg); box-shadow:
+    inset 0 0 0 1px color-mix(in oklab, var(--text-primary) 6%, transparent);
+    display: grid; place-items: center; transition: left .32s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow .25s ease, background-color .25s ease; will-change: left; }
+.nm-toggle .nm-icon { font-size: 16px; line-height: 1; pointer-events: none; transition: transform .25s ease, opacity .25s ease; }
+
+/* State: when aria-checked=true (dark mode active) */
+.nm-toggle[aria-checked="true"] .nm-fill { inset: 4px 32px 4px 4px; }
+.nm-toggle[aria-checked="true"] .nm-thumb { left: 44px; }
+.nm-toggle[aria-checked="true"] .nm-icon { transform: rotate(20deg); }
+
+/* Theme-aware tweaks */
+html[data-theme="dark"] .nm-toggle { --nm-bg: #0f0f0f; --nm-shadow-light: rgba(255,255,255,0.06); --nm-shadow-dark: rgba(0,0,0,0.6); --nm-accent: #8B5CF6; /* vivid purple */ }
+html[data-theme="light"] .nm-toggle { --nm-bg: #ECECEC; --nm-shadow-light: rgba(255,255,255,1); --nm-shadow-dark: rgba(0,0,0,0.15); --nm-accent: #FFA726; /* rich orange */ }
+
+/* Focus and press feedback */
+.nm-toggle:focus-visible .nm-thumb { box-shadow:
+    0 0 0 4px color-mix(in oklab, var(--nm-accent) 25%, transparent),
+    inset 0 0 0 1px color-mix(in oklab, var(--text-primary) 6%, transparent);
+}
+.nm-toggle:active .nm-thumb { box-shadow:
+    0 0 0 2px color-mix(in oklab, var(--nm-accent) 35%, transparent),
+    inset 0 0 0 1px color-mix(in oklab, var(--text-primary) 6%, transparent);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .nm-toggle .nm-fill { transition: none; }
+    .nm-toggle .nm-thumb { transition: none; }
+    .nm-toggle .nm-icon { transition: none; }
+}
+
+/* Custom styles for the home page */
+@layer components {
+    /* Hero overlay based on theme */
+    [data-hero-overlay] { background: var(--hero-overlay); }
+
+    /* Ken Burns slow zoom for hero images */
+    .kenburns img { transform-origin: center center; animation: kenburns 18s ease-in-out infinite alternate; }
+
+    .hero-slide-transition {
+        transition: opacity 1000ms ease-in-out;
+    }
+    
+    .food-card-hover {
+        transition: all 500ms cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    .food-card-hover:hover {
+        transform: scale(1.05);
+    }
+    
+    .food-card-hover:hover img {
+        transform: scale(1.1);
+    }
+    
+    .cultural-card-hover {
+        transition: all 500ms cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    .cultural-card-hover:hover {
+        transform: scale(1.05);
+    }
+    
+    .cultural-card-hover:hover img {
+        transform: scale(1.1);
+    }
+
+    /* In-map overlay panel (anchored top-left) */
+    .map-overlay {
+        position: absolute;
+        top: 12px;
+        left: 12px;
+        z-index: 5;
+        width: clamp(260px, 32vw, 420px);
+        background: var(--surface-bg);
+        border: 0.5px solid var(--surface-border);
+        box-shadow: var(--surface-shadow);
+        border-radius: 1rem; /* 16px */
+        overflow: hidden;
+    }
+
+    /* Experience cards (food & cultural) base + dynamic contrast variant */
+    .experience-card { color: var(--text-primary); }
+    .experience-card.on-light-bg h3,
+    .experience-card.on-light-bg p,
+    .experience-card.on-light-bg span,
+    .experience-card.on-light-bg .chip {
+        color: #111 !important;
+        -webkit-text-fill-color: #111 !important;
+    }
+    .experience-card.on-light-bg .chip {
+        background: rgba(0,0,0,0.35);
+        color: #fff !important; /* keep chips legible */
+    }
+    .experience-card.on-light-bg .badge {
+        filter: brightness(0.95) contrast(1.1);
+    }
+    
+    .gradient-text {
+        background: linear-gradient(135deg, var(--grad-text-from), var(--grad-text-via), var(--grad-text-to));
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    .section-title-gradient {
+        background: linear-gradient(90deg, var(--grad-section-from), var(--grad-section-to));
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    .section-title-alt-gradient {
+        background: linear-gradient(90deg, var(--grad-alt-from), var(--grad-alt-via), var(--grad-alt-to));
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    /* In light mode, make hero CTA text and theme label match the 'Two Islands' gradient */
+    html[data-theme="light"] .hero-cta-text {
+        background: linear-gradient(90deg, var(--grad-section-from), var(--grad-section-to));
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    /* For the two hero CTA button labels, use solid white in light mode for better contrast */
+    html[data-theme="light"] .hero-cta-label {
+        background: none !important;
+        -webkit-text-fill-color: initial !important;
+        color: #ffffff !important;
+    }
+
+    /* Scroll reveal utility: elements start slightly translated and transparent */
+    .reveal-on-scroll { opacity: 0; transform: translateY(16px); transition: opacity 600ms ease, transform 600ms ease; }
+    .reveal-on-scroll.is-visible { opacity: 1; transform: translateY(0); }
+
+    /* Pressable microinteraction */
+    .pressable { transition: transform 120ms ease, filter 120ms ease; will-change: transform; }
+    .pressable.is-pressed { transform: translateY(1px) scale(0.99); filter: brightness(0.98); }
+    /* Badges */
+    .badge { display: inline-flex; align-items: center; gap: 0.375rem; border-radius: 9999px; font-weight: 600; color: var(--badge-text); }
+    .badge--sm { font-size: 0.75rem; padding: 0.25rem 0.5rem; }
+    .badge--md { font-size: 0.875rem; padding: 0.5rem 0.75rem; }
+    .badge--ph { background: var(--badge-ph-bg); }
+    .badge--id { background: var(--badge-id-bg); }
+    .chip { display:inline-flex; align-items:center; border-radius:9999px; font-size:0.875rem; padding:0.25rem 0.75rem; background: var(--badge-chip-bg); color:#fff; backdrop-filter:saturate(140%) blur(6px); }
+    
+    .smooth-scroll {
+        scroll-behavior: smooth;
+    }
+
+    /* Map styles */
+    #map-container .map-region {
+        fill: #10b981; /* emerald-500 */
+        fill-opacity: 0.65;
+        stroke: rgba(255, 255, 255, 0.15);
+        stroke-width: 2;
+        transition: fill-opacity 200ms ease, transform 200ms ease, filter 200ms ease;
+        cursor: pointer;
+    }
+    #map-container .map-region:is(:hover, :focus, .is-hovered) {
+        fill-opacity: 0.95;
+        filter: drop-shadow(0 6px 12px rgba(16, 185, 129, 0.35));
+    }
+    #map-container #id .map-region { fill: #f97316; /* orange-500 */ }
+    #map-container #ph .map-region { fill: #22c55e; /* green-500 */ }
+
+        /* Floating background shapes (non-obstructive, 3D) */
+        .floating-shapes { position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; perspective: 1100px; perspective-origin: 50% 40%; transform-style: preserve-3d; }
+        .fs-shape { position: absolute; display: block; left: var(--x, 50%); top: var(--y, 50%); width: var(--size, 200px); height: var(--size, 200px);
+                transform: translate(-50%, -50%) translateZ(var(--z, -260px)) rotateX(14deg) rotateY(-18deg) rotateZ(0deg);
+                filter: blur(var(--blur, 2px)); opacity: var(--alpha, .08); will-change: transform, opacity; animation: float3d var(--dur, 40s) ease-in-out infinite alternate;
+        }
+        .fs-shape::after { content: ""; position: absolute; inset: -10%; border-radius: inherit; pointer-events: none; background: radial-gradient( circle at 30% 30%, rgba(255,255,255,0.18), rgba(255,255,255,0) 45% ); mix-blend-mode: screen; }
+        .fs-shape.sphere { border-radius: 9999px; background: radial-gradient( circle at 35% 35%, color-mix(in oklab, var(--turquoise) 60%, transparent), color-mix(in oklab, var(--sunset) 50%, transparent) ); box-shadow: 0 18px 60px rgba(0,0,0,0.18), inset 0 10px 22px rgba(255,255,255,0.12); }
+        .fs-shape.cube { border-radius: var(--radius, 16px); background: linear-gradient(135deg, color-mix(in oklab, var(--palm) 60%, transparent), color-mix(in oklab, var(--turquoise) 40%, transparent)); box-shadow: 0 16px 50px rgba(0,0,0,0.16), inset 0 1px 0 rgba(255,255,255,0.22); }
+        .fs-shape.pill { height: var(--thick, 140px); width: var(--size, 320px); border-radius: 99px; background: linear-gradient(90deg, color-mix(in oklab, var(--grad-alt-from) 55%, transparent), color-mix(in oklab, var(--grad-alt-to) 45%, transparent)); box-shadow: 0 20px 60px rgba(0,0,0,0.18), inset 0 1px 0 rgba(255,255,255,0.22); }
+        @keyframes float3d {
+            0% { transform: translate(calc(-50% + 0px), calc(-50% + 0px)) translateZ(calc(var(--z, -260px) - 20px)) rotateX(12deg) rotateY(-16deg) rotateZ(0deg); opacity: var(--alpha, .08); }
+            100% { transform: translate(calc(-50% + var(--dx, 40px)), calc(-50% + var(--dy, 40px))) translateZ(calc(var(--z, -260px) + 40px)) rotateX(18deg) rotateY(-8deg) rotateZ(6deg); opacity: calc(var(--alpha, .08) + 0.02); }
+        }
+
+        /* Footer: transparent background */
+        footer { background: transparent !important; }
+}
+
+@layer utilities {
+    .text-shadow {
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    }
+    
+    .backdrop-blur-strong {
+        backdrop-filter: blur(20px);
+    }
+}
+
+/* Smooth scrolling for the entire page */
+html {
+    scroll-behavior: smooth;
+}
+
+body { background-color: var(--bg-body); color: var(--text-primary); }
+
+/* Loading animation for images */
+img {
+    transition: opacity 300ms ease-in-out;
+}
+
+img[data-loading] {
+    opacity: 0;
+}
+
+/* Global custom cursor: white filled circle */
+body.use-app-cursor, body.use-app-cursor * { cursor: none !important; }
+#app-cursor { width: 18px; height: 18px; border-radius: 50%; background: #fff; box-shadow: 0 2px 8px rgba(0,0,0,0.25); transition: transform 40ms linear; }
+html[data-theme="dark"] #app-cursor { background: #fff; }
+html[data-theme="light"] #app-cursor { background: #ffffff; }
+
+/* Ken Burns keyframes for hero */
+@keyframes kenburns {
+    0%   { transform: scale(1) translate3d(0,0,0); }
+    100% { transform: scale(1.08) translate3d(0,0,0); }
+}
+
+/* Dark-friendly Leaflet controls */
+.leaflet-container { background: transparent !important; }
+.leaflet-control-zoom a {
+    background: rgba(17,17,17,0.85);
+    color: #fff;
+  border: 1px solid rgba(255,255,255,0.12);
+}
+.leaflet-control-zoom a:hover { background: rgba(34,34,34,0.95); }
+
+/* Theme: dark (default) */
+html[data-theme="dark"] body { background-color: #121212; color: #F5F5F5; }
+html[data-theme="dark"] #leaflet-map { --map-bg: #0f0f0f; }
+html[data-theme="dark"] #region-panel { background-color: var(--card-bg); box-shadow: 0 1px 0 var(--panel-ring) inset; }
+html[data-theme="dark"] .card-surface { background-color: var(--card-bg); }
+html[data-theme="dark"] .accent-surface { background-color: var(--accent-bg); }
+html[data-theme="dark"] .leaflet-control-zoom a { background: rgba(17,17,17,0.85); color: #fff; border-color: rgba(255,255,255,0.12); }
+/* Minimal: sections follow body background */
+html[data-theme="dark"] section#culinary { background: transparent; }
+html[data-theme="dark"] section#cultural { background: transparent; }
+html[data-theme="dark"] section#map { background: transparent; }
+
+/* Theme: light */
+html[data-theme="light"] body { background-color: #FAF8F3; color: #1A1A1A; }
+html[data-theme="light"] #leaflet-map { --map-bg: #EDE7DC; /* close to #F5EFE6 for subtle ocean bg */ }
+html[data-theme="light"] {
+    --text-primary: #1A1A1A;
+    --text-secondary: #5C5C5C;
+    --text-muted: #9E9E9E;
+    --bg-body: #FAF8F3; /* off-white sand */
+    --card-bg: #FFFFFF; /* card */
+    --accent-bg: #F5EFE6; /* rattan mat */
+    --sunset: #FF7043;
+    --palm: #2E7D32;
+    --turquoise: #0097A7;
+    --cta: #FFB300;
+    --pill-bg: #FFFFFF;
+    --pill-active: #FFB300;
+    --pill-text: #1b1b18;
+    --panel-ring: rgba(0,0,0,0.08);
+
+    /* Softer light-mode gradients */
+    --grad-text-from: #4caf50;
+    --grad-text-via: #26c6da;
+    --grad-text-to: #ffb300;
+    --grad-section-from: #2e7d32;
+    --grad-section-to: #0097a7;
+    --grad-alt-from: #a78bfa;
+    --grad-alt-via: #f472b6;
+    --grad-alt-to: #fb7185;
+    --hero-overlay: rgba(255,255,255,0.35);
+    --hero-fallback-1: linear-gradient(to bottom right, #bbf7d0, #a7f3d0, #bfdbfe);
+    --hero-fallback-2: linear-gradient(to bottom right, #fed7aa, #fecaca, #fecaca);
+    --hero-fallback-3: linear-gradient(to bottom right, #e5e7eb, #e2e8f0, #e2e8f0);
+
+    /* Badges */
+    --badge-text: #111;
+    --badge-ph-bg: #4caf50; /* palm-ish */
+    --badge-id-bg: #ff7043; /* sunset-ish */
+    --badge-chip-bg: rgba(0,0,0,0.2);
+
+    /* Minimal surfaces (light) */
+    --surface-bg: #FFFFFF;
+    --surface-border: rgba(0,0,0,0.06);
+    --surface-shadow: 0 6px 16px rgba(0,0,0,0.08);
+    --control-shadow: 0 3px 12px rgba(0,0,0,0.10);
+    /* Footer */
+    --footer-bg: #FFFFFF;
+    --footer-text: #111111;
+    --footer-border: #FFFFFF;
+}
+html[data-theme="light"] #region-panel { background-color: var(--card-bg); box-shadow: 0 1px 0 var(--panel-ring) inset; }
+html[data-theme="light"] .card-surface { background-color: var(--card-bg); }
+html[data-theme="light"] .accent-surface { background-color: var(--accent-bg); }
+html[data-theme="light"] .leaflet-control-zoom a { background: rgba(255,255,255,0.85); color: #111; border-color: rgba(0,0,0,0.12); }
+
+/* Minimal: sections follow body background */
+html[data-theme="light"] section#culinary { background: transparent; }
+html[data-theme="light"] section#cultural { background: transparent; }
+html[data-theme="light"] section#map { background: transparent; }
+
+
+/* Light mode: keep nav and hero text white over hero backgrounds */
+html[data-theme="light"] [data-theme-nav] { --text-primary: #ffffff; --text-secondary: #e5e7eb; }
+html[data-theme="light"] #hero-carousel { --text-primary: #ffffff; --text-secondary: #e5e7eb; }
+
+/* Hero overlay adjustment in light mode */
+/* Now handled via [data-hero-overlay] */
+
+@media (max-width: 767px) {
+  .map-panel {
+    position: static; /* sits above the map */
+    width: 100%;
+  }
+}
+
+@media (min-width: 768px) {
+  .map-panel {
+    position: absolute; /* overlay inside map area */
+    top: 12px;
+    left: 12px;
+    z-index: 5;
+    width: clamp(260px, 32vw, 420px);
+  }
+}
+
+/* Modal styles served from public/css/modal.css */

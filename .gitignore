@@ -25,3 +25,8 @@ Thumbs.db
 
 .gitignore
 .github
+
+# Large local datasets (avoid pushing huge blobs)
+/public/data/geo/
+/public/data/**/*.geojson
+/public/data/**/*.csv
